@@ -47,6 +47,7 @@
 
 \documentclass{sig-alternate-05-2015}
 \usepackage{placeins}
+\usepackage{epstopdf}
 
 
 \begin{document}
@@ -193,9 +194,10 @@ Recommendation algorithms are a kind of learning algorithms which are widely use
 
 User experience is now a critical factor to keep users and attract new users among web applications. That is the reason Airbnb wants to provide personalized and unique experience for its new users, thus Airbnb need an effective recommendation system to recommend a country for first-time booking.
 
-However, the main challenge here is that Airbnb doesn?t have the travel history or other type of the traveling data of new users, the only data available here is basic feature such as age, gender, session log etc., basically like a white paper to a recommendation system. While a typical recommendation system might make recommendation based on a few strongly related features, the system designed here need to focus on correctly classify similar users first, then trying to make recommendation with some relatively strong features. And that is why we choose collaborative filtering as our first-step approach.
+However, the main challenge here is that Airbnb doesn't have the travel history or other type of the traveling data of new users, the only data available here is basic feature such as age, gender, session log etc., basically like a white paper to a recommendation system. While a typical recommendation system might make recommendation based on a few strongly related features, the system designed here need to focus on correctly classify similar users first, then trying to make recommendation with some relatively strong features. And that is why we choose collaborative filtering as our first-step approach.
 
 \section{Dataset Description}
+\subsection{New user data set}
 The training data consists of 213451 rows and 16 columns, while test user set has 62096 rows and 15 columns. The additional column is a 'country\_destination column', and this is where our predictions will be focused on.
 
 About 60\% of the users did not making a making (NDF:no destination found). US is the most popular destination among who booked a travel destination.
@@ -216,7 +218,7 @@ Minimum & 1.00\\ \hline
 1st Quartile & 28.00 \\ \hline
 Median & 34.00 \\ \hline
 Mean & 37.41 \\ \hline
-3rd Quartile & 43.00 \\ \hline
+3rd Quartile & 43.00 \\ \hlineg
 Maximum & 150.00 \\
 \hline\end{tabular}
 \end{table}
@@ -244,6 +246,28 @@ The differences between genders on destination country choices are not significa
 \caption{Destination Choice based on Gender}
 \vskip -6pt
 \end{figure}
+
+\FloatBarrier
+\subsection{Listing data set}
+The other data set is about detailed information of host listings among 16 countries available on Airbnb, although it covers almost all the countries in new user data set, but PT(Portugal) listing data is missing here.
+
+This listing data set contains most of the public information available on Airbnb, and lots of features such as listing price, listing rating score, host registration information and neighbourhood etc., may help recommendation system identify better listings among target country for new users. However, due to the limitation of new user data, the recommendation on this part is most likely to be based on features weighted by common sense: highest rated, best available price etc..
+
+\begin{figure}
+\centering
+\includegraphics[height=2in, width=3in]{country-avgPrice}
+\caption{Average price distribution among countries}
+\end{figure}
+
+Since listing price is showed in dollar, so the average listing price distribution is influenced by currency exchange rate in some extent, but besides that fact, the average listing price definitely reflects the popularity of these destination countries. BM(Bermuda) is a typical high-end vacation hot spot, but it's surprised to see UY(Uruguay) has such a high average price, maybe because the retrived UY listings is very limited. Other than these two countries, AU and US are the most expensive countries to go on Airbnb. It's interesting to see AU has higher average listing price over US, a possible explaination for this could be the number of listings in US is much greater than AU's, thus competetion over the host has lowered the average listing price in US.
+
+\begin{figure}
+\centering
+\includegraphics[height=2in, width=3in]{country-avgRating}
+\caption{Average rating score distribution among countries}
+\end{figure}
+
+When comes to average review scores, most of countries get over score of 90. BM, UY and VU receives average score of 100, but since the number of listing of these 3 countries in this data set is very limited, it probably has large bias here. Besides these 3 countries, US and NL is probably best reviewed place to go on Airbnb, IT and ES is the worst reviewed, but still has average score of over 89.
 
 \FloatBarrier
 \section{Proposed Algorithmic Approach}
