@@ -188,38 +188,59 @@ Airbnb has become more and more popular under the trend of sharing economy. In o
 \keywords{Learning Algorithms; Recommendation Systems; Collaborative Filtering; Cluster Models}
 
 \section{Introduction}
-Data mining is the process of discovering interesting patterns from massive amounts of data. As a knowledge discovery process, it typically involves data cleaning, data integration, data selection, data transformation, pattern discovery, pattern evaluation, and knowledge presentation [1]. The science of learning plays a key role in the fields of data mining, statistics and artificial intelligence, intersecting with areas of engineering and other disciplines[2].  In a typical scenario, a quantitative or categorical outcome measurement is predicted based on a set of features.
+Data mining is the process of discovering interesting patterns from massive amounts of data. As a knowledge discovery process, it typically involves data cleaning, data integration, data selection, data transformation, pattern discovery, pattern evaluation, and knowledge presentation\cite{data mining}. The science of learning plays a key role in the fields of data mining, statistics and artificial intelligence, intersecting with areas of engineering and other disciplines\cite{statistical}.  In a typical scenario, a quantitative or categorical outcome measurement is predicted based on a set of features.
 
-Recommendation algorithms are a kind of learning algorithms which are widely used on e-commerce web sites.  they use input about a customer's interests to generate a list of recommended items. Most recommendation algorithms are designed for finding similar customers, where they aggregate items from the similar customers, eliminates items the user has already purchased or rated, and recommends the remaining items to the user. The popular versions of these algorithms are collaborative filtering and cluster models. In the collaborative filtering, the similarity of customers is measured by the cosine of the angle between the two vectors which represent users' interests[3]. Using this algorithm to generate recommendations is computationally expensive, but it can be released by dimensionally reduction techniques[4]. To find the similar customers to the user, cluster models divide the customer base into many segments and treat the task as a classification problem[5].  Some algorithms classify users into multiple segments and describe the strength of each relationship[6]. Besides grouping the user to the similar customers, other algorithms such as search-based methods and item-to-item collaborative filtering focus on finding similar items[7]. Search- or content-based methods treat the recommendations problem as a search for related items[8].
+Recommendation algorithms are a kind of learning algorithms which are widely used on e-commerce web sites.  they use input about a customer\'s interests to generate a list of recommended items. Most recommendation algorithms are designed for finding similar customers, where they aggregate items from the similar customers, eliminates items the user has already purchased or rated, and recommends the remaining items to the user. The popular versions of these algorithms are collaborative filtering and cluster models. In the collaborative filtering, the similarity of customers is measured by the cosine of the angle between the two vectors which represent users' interests\cite{analysis}. Using this algorithm to generate recommendations is computationally expensive, but it can be released by dimensionally reduction techniques\cite{collaborative}. To find the similar customers to the user, cluster models divide the customer base into many segments and treat the task as a classification problem\cite{clustering}.  Some algorithms classify users into multiple segments and describe the strength of each relationship\cite{cf}. Besides grouping the user to the similar customers, other algorithms such as search-based methods and item-to-item collaborative filtering focus on finding similar items\cite{item2item}. Search- or content-based methods treat the recommendations problem as a search for related items\cite{massive}.
 
 User experience is now a critical factor to keep users and attract new users among web applications. That is the reason Airbnb wants to provide personalized and unique experience for its new users, thus Airbnb need an effective recommendation system to recommend a country for first-time booking.
 
 However, the main challenge here is that Airbnb doesn't have the travel history or other type of the traveling data of new users, the only data available here is basic feature such as age, gender, session log etc., basically like a white paper to a recommendation system. While a typical recommendation system might make recommendation based on a few strongly related features, the system designed here need to focus on correctly classify similar users first, then trying to make recommendation with some relatively strong features. And that is why we choose collaborative filtering as our first-step approach.
 
 \section{Dataset Description}
-\subsection{New user data set}
-The training data consists of 213451 rows and 16 columns, while test user set has 62096 rows and 15 columns. The additional column is a 'country\_destination column', and this is where our predictions will be focused on.
+In this section, the data sets which are applied for the recommendation are introduced. The data is  consisted of two parts: the first one is the list of users\' first booking destinations as well as their demographics and web session records; the other is the aggregated public host information dataset which is sourced from publicly available information from the Airbnb site. By analyzing the statistics of the source data, we can have an overview of the entire data and help to decide how to apply for the recommendation algorithms.
 
-About 60\% of the users did not making a making (NDF:no destination found). US is the most popular destination among who booked a travel destination.
+\subsection{User data set}
+In the list of user first booking, each user is specified by a unique string id and each instance contains multiple types of properties for that user, which should be date, numerical, categorical, etc. There exists missing values in each fields, which should be handled before building recommendation model. The users whose destination countries are unavailable (indicated as NDF) are also need to be filtered out. The details of user properties are described as Table.\ref{table:users}.
 
-\begin{figure}
-\centering
-\includegraphics[height=2in, width=3in]{1}
-\caption{Destination Country Distribution.}
-\end{figure}
-
-Quite a few age values are given in the year format. For now we ignore the null values and inconsistent values, and the corrected data will be presented in the next update.
-
-\begin{table}
-\centering
-\caption{User Age Statistics}
+\begin{table}[!htb]
+\caption{User Data Statistics}
+\label{table:users}
 \begin{tabular}{|c|c|l|} \hline
-Minimum & 1.00\\ \hline
-1st Quartile & 28.00 \\ \hline
-Median & 34.00 \\ \hline
-Mean & 37.41 \\ \hline
-3rd Quartile & 43.00 \\ \hlineg
-Maximum & 150.00 \\
+field & type & description  \\ \hline                                                                                                                              
+id & string & unique for each user \\ \hline                                                                                                                     
+\shortstack{date\_account\\ \_created} & date & ~ \\ \hline                                                                                                                                             
+\shortstack{timestamp\_first\\ \_active}  & timestampe & ~  \\ \hline                                                                                                                                          \shortstack{date\_first\\ \_booking} & date & ~ \\ \hline                                                                                                                                             
+gender & categorical & \shortstack[l]{FEMALE, MALE, \\OTHER, unknown} \\ \hline                                                                                                                 
+age & numerical & 1 to 150  \\ \hline                                                                                                                      
+signup\_method  & categorical & basic, facebook, google  \\ \hline                                                                                                                       
+signup\_flow & numerical & 0 to 25  \\ \hline                                                                                                                                  language & categorical & en, zh, fr, es, ko, de, etc.  \\ \hline                                                                                                              
+affiliate\_channel  & categorical & \shortstack[l]{api, content, direct, etc}  \\ \hline
+affiliate\_provider  & categorical & \shortstack[l]{bing, facebook, google, etc} \\ \hline
+\shortstack{first\_affiliate\\ \_tracked} & categorical & \shortstack[l]{linked, local ops, product, etc.} \\ \hline
+signup\_app & categorical & Android, iOS, Moweb, Web \\ \hline
+first\_device\_type & categorical & \shortstack[l]{Android Phone, iPad, \\ iPhone, Mac Desktop, etc.} \\ \hline
+first\_browser  & categorical & \shortstack[l]{Chrome, Safari, Firefox, etc.} \\ 
+\hline \end{tabular}
+\end{table}
+
+Since most records in the dataset have no first booking destination, we only focus on the instances with available destination. After filtering the records without specific destinations, the numbers of the users for each country are as Table.\ref{table:destination} described. The most number of remaining users is for other destinations, which is less useful for the recommendation. The instances with specific destinations are the data we can use to build the predication model for new users.
+
+\begin{table}[!htb]
+\centering
+\caption{Users First Booking Destination}
+\label{table:destination}
+\begin{tabular}{|c|c|l|} \hline
+Destination Country & Population\\ \hline
+AU & 537 \\ \hline
+CA & 1425 \\ \hline
+DE & 1059 \\ \hline
+ES & 2243 \\ \hline
+FR & 5013 \\ \hline
+GB & 2318 \\ \hline
+IT & 2827 \\ \hline
+NL & 757 \\ \hline
+PT & 217 \\ \hline
+other & 10075 \\
 \hline\end{tabular}
 \end{table}
 
@@ -229,26 +250,21 @@ Maximum & 150.00 \\
 \caption{Age Distribution for Users on Airbnb}
 \end{figure}
 
-Compared to basic sign-up and Facebook sign up users, those who signed up via Google have a much lower tendency to book a trip to U.S.
-
 \begin{figure}
 \centering
 \includegraphics[height=2in, width=2in]{3}
-\caption{Destination Choice ~ Sign Up Method}
-\vskip -6pt
-\end{figure}
+\caption{Destination based on Sign Up Method}
 
-The differences between genders on destination country choices are not significant. It might be hard to generate any useful conclusion based on gender.
+\end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[height=2in, width=2in]{4}
-\caption{Destination Choice based on Gender}
-\vskip -6pt
+\caption{Destination based on Gender}
 \end{figure}
 
 \FloatBarrier
-\subsection{Listing data set}
+\subsection{Hosts data set}
 The other data set is about detailed information of host listings among 16 countries available on Airbnb, although it covers almost all the countries in new user data set, but PT(Portugal) listing data is missing here.
 
 This listing data set contains most of the public information available on Airbnb, and lots of features such as listing price, listing rating score, host registration information and neighbourhood etc., may help recommendation system identify better listings among target country for new users. However, due to the limitation of new user data, the recommendation on this part is most likely to be based on features weighted by common sense: highest rated, best available price etc..
@@ -273,22 +289,19 @@ When comes to average review scores, most of countries get over score of 90. BM,
 \section{Proposed Algorithmic Approach}
 Using collaborative filtering to aggregate the similar users based on their first booking on Airbnb. The similarity between users is measured by cosine of the angle between the two vectors which indicate users? properties. Dimensionality reduction should be applied to reduce computational complexity and speed up the algorithm.
 
-\section{Reference}
-[1]. Han, J., Kamber, M., and Pei, J. , "Data Mining: Concepts and Techniques", 3rd Edition, 2011.
+\medskip
 
-[2]. Hastie T., Tibshirani R., and Friedman, J. , "The Elements of Statistical Learning: Data Mining, Inference, and Prediction", 2nd Edition, 2009.
+\begin{thebibliography}{9}
+\bibitem{data mining} Han, J., Kamber, M., and Pei, J. , "Data Mining: Concepts and Techniques", 3rd Edition, 2011.
+\bibitem{statistical} Hastie T., Tibshirani R., and Friedman, J. , "The Elements of Statistical Learning: Data Mining, Inference, and Prediction", 2nd Edition, 2009.
+\bibitem{analysis} B.M. Sarwarm et al., "Analysis of Recommendation Algorithms for E-Commerce", ACM Conf. Electronic Commerce, ACM Press, 2000, pp.158-167.
+\bibitem{collaborative} K. Goldberg et al., "Eigentaste: A Constant Time Collaborative Filtering Algorithm", Information Retrieval J., vol. 4, no. 2, July 2001, pp. 133-151.
+\bibitem{clustering} P.S. Bradley, U.M. Fayyad, and C. Reina, "Scaling Clustering Algorithms to Large Databases", Knowledge Discovery and Data Mining, Kluwer Academic, 1998, pp. 9-15.
+\bibitem{cf} L. Ungar and D. Foster, "Clustering Methods for Collaborative Filtering", Proc. Workshop on Recommendation Systems, AAAI Press, 1998.
+\bibitem{item2item} G. Linden, B. Smith, and J. York, "Amazon.com recommendations: item-to-item collaborative filtering", Internet Computing 7:1, 2003, pp. 76-80.
+\bibitem{massive} Leskovec, J., Rajaraman, A., and Ullman, "Mining of Massive Datasets", 2nd Edition, 2004, pp. 307-341.
 
-[3]. B.M. Sarwarm et al., "Analysis of Recommendation Algorithms for E-Commerce", ACM Conf. Electronic Commerce, ACM Press, 2000, pp.158-167.
-
-[4]. K. Goldberg et al., "Eigentaste: A Constant Time Collaborative Filtering Algorithm", Information Retrieval J., vol. 4, no. 2, July 2001, pp. 133-151.
-
-[5]. P.S. Bradley, U.M. Fayyad, and C. Reina, "Scaling Clustering Algorithms to Large Databases", Knowledge Discovery and Data Mining, Kluwer Academic, 1998, pp. 9-15.
-
-[6]. L. Ungar and D. Foster, "Clustering Methods for Collaborative Filtering", Proc. Workshop on Recommendation Systems, AAAI Press, 1998.
-
-[7]. G. Linden, B. Smith, and J. York, "Amazon.com recommendations: itemto-item collaborative filtering", Internet Computing 7:1, 2003, pp. 76?80.
-
-[8]. Leskovec, J., Rajaraman, A., and Ullman, "Mining of Massive Datasets", 2nd Edition, 2004, pp. 307-341.
+\end{thebibliography}
 %\balancecolumns % GM June 2007
 % That's all folks!
 \end{document}
