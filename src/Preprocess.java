@@ -189,7 +189,7 @@ public class Preprocess {
 	private void load(List<Example> dataList) {
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(new FileReader("/Users/zhao/Documents/CS6220/project/Data/Users.csv"));
+			br = new BufferedReader(new FileReader("/Users/hengxu/Documents/NEU/Classes/DataMining/DataMiningProject/Data/Users.csv"));
 			String line = br.readLine();
 			while((line = br.readLine()) != null) {
 				String[] fields = line.split(",");

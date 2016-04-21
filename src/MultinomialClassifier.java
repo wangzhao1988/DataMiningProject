@@ -97,7 +97,7 @@ public class MultinomialClassifier {
 			errorRates.add(new ArrayList<Double>());
 		}
 		
-		int[] sizeArray = {1000, 2000, 5000, 8000, 10000, 20000, 50000, trainingSize};
+		int[] sizeArray = {1000, 2000, 5000, 8000, 10000, 20000, 30000};
 		
 		for (int i = 0; i < sizeArray.length; i++) {
 			int size = sizeArray[i];
