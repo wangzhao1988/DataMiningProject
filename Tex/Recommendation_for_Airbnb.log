@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  19 APR 2016 12:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  22 APR 2016 11:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -325,7 +325,7 @@ LaTeX Font Info:    Try loading font information for T1+ptm on input line 138.
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
 Excluding 'CCSXML' comment.
-Overfull \hbox (28.40175pt too wide) in paragraph at lines 208--224
+Overfull \hbox (21.13953pt too wide) in paragraph at lines 208--224
 [][] 
  []
 
@@ -333,59 +333,24 @@ Overfull \hbox (28.40175pt too wide) in paragraph at lines 208--224
 
 
 ]
-Package epstopdf Info: Source file: <2.eps>
-(epstopdf)                    date: 2016-03-30 10:58:01
-(epstopdf)                    size: 2559424 bytes
-(epstopdf)             Output file: <2-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-03-30 11:01:51
-(epstopdf)                    size: 88999 bytes
-(epstopdf)             Command: <repstopdf --outfile=2-eps-converted-to.pdf 2.e
-ps>
+Package epstopdf Info: Source file: <AgeDistribution.eps>
+(epstopdf)                    date: 2016-04-21 16:12:26
+(epstopdf)                    size: 6850805 bytes
+(epstopdf)             Output file: <AgeDistribution-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-04-22 10:41:35
+(epstopdf)                    size: 78331 bytes
+(epstopdf)             Command: <repstopdf --outfile=AgeDistribution-eps-conver
+ted-to.pdf AgeDistribution.eps>
 (epstopdf)             \includegraphics on input line 249.
 Package epstopdf Info: Output file is already uptodate.
 
-<2-eps-converted-to.pdf, id=13, 469.755pt x 207.77625pt>
-File: 2-eps-converted-to.pdf Graphic file (type pdf)
+<AgeDistribution-eps-converted-to.pdf, id=13, 925.4575pt x 636.3775pt>
+File: AgeDistribution-eps-converted-to.pdf Graphic file (type pdf)
 
-<use 2-eps-converted-to.pdf>
-Package pdftex.def Info: 2-eps-converted-to.pdf used on input line 249.
-(pdftex.def)             Requested size: 216.80672pt x 144.54514pt.
-Package epstopdf Info: Source file: <3.eps>
-(epstopdf)                    date: 2016-03-30 10:58:12
-(epstopdf)                    size: 2999716 bytes
-(epstopdf)             Output file: <3-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-03-30 11:01:51
-(epstopdf)                    size: 95949 bytes
-(epstopdf)             Command: <repstopdf --outfile=3-eps-converted-to.pdf 3.e
-ps>
-(epstopdf)             \includegraphics on input line 255.
-Package epstopdf Info: Output file is already uptodate.
-
-<3-eps-converted-to.pdf, id=14, 391.4625pt x 292.09125pt>
-File: 3-eps-converted-to.pdf Graphic file (type pdf)
-
-<use 3-eps-converted-to.pdf>
-Package pdftex.def Info: 3-eps-converted-to.pdf used on input line 255.
-(pdftex.def)             Requested size: 144.54019pt x 144.54326pt.
-Package epstopdf Info: Source file: <4.eps>
-(epstopdf)                    date: 2016-03-30 10:58:21
-(epstopdf)                    size: 3045274 bytes
-(epstopdf)             Output file: <4-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-03-30 11:51:00
-(epstopdf)                    size: 93253 bytes
-(epstopdf)             Command: <repstopdf --outfile=4-eps-converted-to.pdf 4.e
-ps>
-(epstopdf)             \includegraphics on input line 262.
-Package epstopdf Info: Output file is already uptodate.
-
-<4-eps-converted-to.pdf, id=15, 469.755pt x 246.9225pt>
-File: 4-eps-converted-to.pdf Graphic file (type pdf)
-
-<use 4-eps-converted-to.pdf>
-Package pdftex.def Info: 4-eps-converted-to.pdf used on input line 262.
-(pdftex.def)             Requested size: 144.54019pt x 144.5376pt.
- [2 <./2-eps-converted-to.pdf> <./3-eps-converted-to.pdf> <./4-eps-converted-to
-.pdf>]
+<use AgeDistribution-eps-converted-to.pdf>
+Package pdftex.def Info: AgeDistribution-eps-converted-to.pdf used on input lin
+e 249.
+(pdftex.def)             Requested size: 216.80472pt x 144.5382pt.
 Package epstopdf Info: Source file: <country-avgPrice.eps>
 (epstopdf)                    date: 2016-04-15 15:15:54
 (epstopdf)                    size: 49018 bytes
@@ -394,15 +359,15 @@ Package epstopdf Info: Source file: <country-avgPrice.eps>
 (epstopdf)                    size: 31935 bytes
 (epstopdf)             Command: <repstopdf --outfile=country-avgPrice-eps-conve
 rted-to.pdf country-avgPrice.eps>
-(epstopdf)             \includegraphics on input line 274.
+(epstopdf)             \includegraphics on input line 262.
 Package epstopdf Info: Output file is already uptodate.
 
-<country-avgPrice-eps-converted-to.pdf, id=29, 803.0pt x 599.23875pt>
+<country-avgPrice-eps-converted-to.pdf, id=14, 803.0pt x 599.23875pt>
 File: country-avgPrice-eps-converted-to.pdf Graphic file (type pdf)
 
 <use country-avgPrice-eps-converted-to.pdf>
 Package pdftex.def Info: country-avgPrice-eps-converted-to.pdf used on input li
-ne 274.
+ne 262.
 (pdftex.def)             Requested size: 216.8129pt x 144.53343pt.
 Package epstopdf Info: Source file: <country-avgRating.eps>
 (epstopdf)                    date: 2016-04-15 15:15:54
@@ -412,88 +377,117 @@ Package epstopdf Info: Source file: <country-avgRating.eps>
 (epstopdf)                    size: 33543 bytes
 (epstopdf)             Command: <repstopdf --outfile=country-avgRating-eps-conv
 erted-to.pdf country-avgRating.eps>
-(epstopdf)             \includegraphics on input line 282.
+(epstopdf)             \includegraphics on input line 270.
 Package epstopdf Info: Output file is already uptodate.
 
-<country-avgRating-eps-converted-to.pdf, id=30, 803.0pt x 599.23875pt>
+<country-avgRating-eps-converted-to.pdf, id=15, 803.0pt x 599.23875pt>
 File: country-avgRating-eps-converted-to.pdf Graphic file (type pdf)
 
 <use country-avgRating-eps-converted-to.pdf>
 Package pdftex.def Info: country-avgRating-eps-converted-to.pdf used on input l
-ine 282.
+ine 270.
 (pdftex.def)             Requested size: 216.8129pt x 144.53343pt.
-
-Overfull \hbox (7.70097pt too wide) in paragraph at lines 289--289
+ [2 <./AgeDistribution-eps-converted-to.pdf> <./country-avgPrice-eps-converted-
+to.pdf>]
+Overfull \hbox (7.70097pt too wide) in paragraph at lines 277--277
 []\secfnt PROPOSED AL-GO-RITH-MIC AP-PROACH 
  []
 
 
-Overfull \hbox (35.5478pt too wide) in paragraph at lines 298--305
+Overfull \hbox (35.5478pt too wide) in paragraph at lines 286--293
  [][] 
  []
 
 Package epstopdf Info: Source file: <Basic_Classifiers.eps>
-(epstopdf)                    date: 2016-04-19 12:04:21
+(epstopdf)                    date: 2016-04-19 12:20:35
 (epstopdf)                    size: 21614 bytes
 (epstopdf)             Output file: <Basic_Classifiers-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-04-19 12:14:35
+(epstopdf)                    date: 2016-04-19 12:20:35
 (epstopdf)                    size: 10847 bytes
 (epstopdf)             Command: <repstopdf --outfile=Basic_Classifiers-eps-conv
 erted-to.pdf Basic_Classifiers.eps>
-(epstopdf)             \includegraphics on input line 312.
+(epstopdf)             \includegraphics on input line 300.
 Package epstopdf Info: Output file is already uptodate.
-<Basic_Classifiers-eps-converted-to.pdf, id=31, 562.1pt x 421.575pt>
+<Basic_Classifiers-eps-converted-to.pdf, id=26, 562.1pt x 421.575pt>
 File: Basic_Classifiers-eps-converted-to.pdf Graphic file (type pdf)
 
 <use Basic_Classifiers-eps-converted-to.pdf>
 Package pdftex.def Info: Basic_Classifiers-eps-converted-to.pdf used on input l
-ine 312.
+ine 300.
 (pdftex.def)             Requested size: 216.808pt x 144.54294pt.
 Package epstopdf Info: Source file: <Ensemble_Classifiers.eps>
 (epstopdf)                    date: 2016-04-18 17:18:30
 (epstopdf)                    size: 24477 bytes
 (epstopdf)             Output file: <Ensemble_Classifiers-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2016-04-19 12:14:36
+(epstopdf)                    date: 2016-04-19 12:20:35
 (epstopdf)                    size: 10747 bytes
 (epstopdf)             Command: <repstopdf --outfile=Ensemble_Classifiers-eps-c
 onverted-to.pdf Ensemble_Classifiers.eps>
-(epstopdf)             \includegraphics on input line 319.
+(epstopdf)             \includegraphics on input line 307.
 Package epstopdf Info: Output file is already uptodate.
 
-<Ensemble_Classifiers-eps-converted-to.pdf, id=32, 562.1pt x 421.575pt>
+<Ensemble_Classifiers-eps-converted-to.pdf, id=27, 562.1pt x 421.575pt>
 File: Ensemble_Classifiers-eps-converted-to.pdf Graphic file (type pdf)
 
 <use Ensemble_Classifiers-eps-converted-to.pdf>
 Package pdftex.def Info: Ensemble_Classifiers-eps-converted-to.pdf used on inpu
-t line 319.
+t line 307.
 (pdftex.def)             Requested size: 216.808pt x 144.54294pt.
- [3 <./country-avgPrice-eps-converted-to.pdf> <./country-avgRating-eps-converte
-d-to.pdf> <./Basic_Classifiers-eps-converted-to.pdf>] [4
 
- <./Ensemble_Classifiers-eps-converted-to.pdf>]
+Overfull \hbox (4.21121pt too wide) in paragraph at lines 318--326
+ [][] 
+ []
+
+Package epstopdf Info: Source file: <K_Means.eps>
+(epstopdf)                    date: 2016-04-22 11:44:38
+(epstopdf)                    size: 1435140 bytes
+(epstopdf)             Output file: <K_Means-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-04-22 11:40:55
+(epstopdf)                    size: 2499 bytes
+(epstopdf)             Command: <repstopdf --outfile=K_Means-eps-converted-to.p
+df K_Means.eps>
+(epstopdf)             \includegraphics on input line 330.
+runsystem(repstopdf --outfile=K_Means-eps-converted-to.pdf K_Means.eps)...execu
+ted safely (allowed).
+
+Package epstopdf Info: Result file: <K_Means-eps-converted-to.pdf>
+(epstopdf)                    date: 2016-04-22 11:44:58
+(epstopdf)                    size: 36789 bytes.
+<K_Means-eps-converted-to.pdf, id=28, 562.1pt x 421.575pt>
+File: K_Means-eps-converted-to.pdf Graphic file (type pdf)
+
+<use K_Means-eps-converted-to.pdf>
+Package pdftex.def Info: K_Means-eps-converted-to.pdf used on input line 330.
+(pdftex.def)             Requested size: 216.808pt x 144.54294pt.
+ [3 <./country-avgRating-eps-converted-to.pdf> <./Basic_Classifiers-eps-convert
+ed-to.pdf> <./Ensemble_Classifiers-eps-converted-to.pdf> <./K_Means-eps-convert
+ed-to.pdf>] [4
+
+]
 (./Recommendation_for_Airbnb.aux) ) 
 Here is how much of TeX's memory you used:
- 3249 strings out of 493089
- 42831 string characters out of 6134842
- 119260 words of memory out of 5000000
- 6611 multiletter control sequences out of 15000+600000
+ 3247 strings out of 493089
+ 42872 string characters out of 6134842
+ 118284 words of memory out of 5000000
+ 6610 multiletter control sequences out of 15000+600000
  54416 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,11n,35p,1477b,463s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/en
 c/dvips/base/8r.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmbx9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.p
-fb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></us
-r/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/te
-xlive/2015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on Recommendation_for_Airbnb.pdf (4 pages, 457774 bytes).
+ts/cm/cmmi9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/
+local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on Recommendation_for_Airbnb.pdf (4 pages, 304262 bytes).
 PDF statistics:
  88 PDF objects out of 1000 (max. 8388607)
- 57 compressed objects within 1 object stream
+ 58 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

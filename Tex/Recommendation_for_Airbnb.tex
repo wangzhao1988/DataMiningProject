@@ -216,7 +216,7 @@ signup\_method  & categorical & basic, facebook, google  \\ \hline
 signup\_flow & numerical & 0 to 25  \\ \hline                                                                                                                                  language & categorical & en, zh, fr, es, ko, de, etc.  \\ \hline                                                                                                              
 affiliate\_channel  & categorical & \shortstack[l]{api, content, direct, etc}  \\ \hline
 affiliate\_provider  & categorical & \shortstack[l]{bing, facebook, google, etc} \\ \hline
-\shortstack{first\_affiliate\\ \_tracked} & categorical & \shortstack[l]{linked, local ops, product, etc.} \\ \hline
+\shortstack{first\_affiliate\\ \_tracked} & categorical & \shortstack[l]{linked, local ops, \\ product, etc.} \\ \hline
 signup\_app & categorical & Android, iOS, Moweb, Web \\ \hline
 first\_device\_type & categorical & \shortstack[l]{Android Phone, iPad, \\ iPhone, Mac Desktop, etc.} \\ \hline
 first\_browser  & categorical & \shortstack[l]{Chrome, Safari, Firefox, etc.} \\ 
@@ -246,21 +246,9 @@ other & 10075 \\
 
 \begin{figure}
 \centering
-\includegraphics[height=2in, width=3in]{2}
+\includegraphics[height=2in, width=3in]{AgeDistribution}
 \caption{Age Distribution for Users on Airbnb}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[height=2in, width=2in]{3}
-\caption{Destination based on Sign Up Method}
-
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[height=2in, width=2in]{4}
-\caption{Destination based on Gender}
+\label{fig:age distribution}
 \end{figure}
 
 \FloatBarrier
@@ -322,6 +310,27 @@ Others & Original value \\
 \end{figure}
 
 \subsection{Collaborative Filtering}
+
+\begin{table}[!htb]
+\centering
+\caption{Clustering Parameters}
+\label{table:clustering}
+\begin{tabular}{|c|c|c|c|} \hline
+\shortstack[l]{Percentage Change \\ of WGSS} & Cluster Num & WGSS & Error Rate \\ \hline
+< 0.3\% & 10 & 114013 & 0.3036 \\ \hline
+< 0.1\% & 17 & 106895 & 0.2978 \\ \hline
+< 0.03\% & 67 & 84909 & 0.2700 \\ \hline
+< 0.003\% & 163 & 73112 & 0.2330 \\ \hline
+< 0.001\% & 424 & 55412 & 0.2137 \\
+\hline\end{tabular}
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics[height=2in,width=3in]{K_Means}
+\caption{WGSS based on Clusters}
+\label{fig:k means}
+\end{figure}
 
 \section{Conclusion}
 

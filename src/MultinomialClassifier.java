@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
@@ -9,26 +11,41 @@ import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.functions.Logistic;
 import weka.classifiers.functions.SMO;
 import weka.classifiers.meta.AdaBoostM1;
+import weka.classifiers.meta.LogitBoost;
 import weka.classifiers.trees.J48;
+import weka.classifiers.trees.LMT;
+import weka.classifiers.trees.REPTree;
 import weka.classifiers.trees.RandomForest;
+import weka.clusterers.SimpleKMeans;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
+import weka.core.DistanceFunction;
 import weka.core.Instance;
 import weka.core.Instances;
 
 public class MultinomialClassifier {
 	private List<String> processedData;
 	private ArrayList<Attribute> attributes;
+	private Map<String, Integer> dest2Index;
+	private Map<Integer, String> index2Dest;
 	
 	public MultinomialClassifier() {
 		this.processedData = new ArrayList<String>();
-		this.attributes = new ArrayList<Attribute>();		
+		this.attributes = new ArrayList<Attribute>();	
+		this.dest2Index = new HashMap<String, Integer>();
+		this.index2Dest = new HashMap<Integer, String>();
 	}
 	
 	public void init() {
 		Preprocess p = new Preprocess();
 		for (String example: p.processedData) {
 			this.processedData.add(example);
+		}
+		
+		for (String dest: p.destinationMap.keySet()) {
+			int index = p.destinationMap.get(dest);
+			this.dest2Index.put(dest, index);
+			this.index2Dest.put(index, dest);
 		}
 		
 		List<String> attribute1List = new ArrayList<String>(p.attributeMap.get("booking2CreateLag"));
@@ -91,13 +108,13 @@ public class MultinomialClassifier {
 		int totalSize = this.processedData.size();
 //		System.out.println(totalSize);
 		int trainingSize = (totalSize * 8)/10;
-				
+		
 		List<List<Double>> errorRates = new ArrayList<List<Double>>();
 		for (int i = 0; i < 7; i++) {
 			errorRates.add(new ArrayList<Double>());
 		}
 		
-		int[] sizeArray = {1000, 2000, 5000, 8000, 10000, 20000, 30000};
+		int[] sizeArray = {1000, 2000, 5000, 8000, 10000, 20000, 50000, trainingSize};
 		
 		for (int i = 0; i < sizeArray.length; i++) {
 			int size = sizeArray[i];
@@ -118,39 +135,46 @@ public class MultinomialClassifier {
 //			Classifier naiveBayesModel = (Classifier)new NaiveBayes();
 //			errorRate = getErrorRate(naiveBayesModel, trainingSet, testingSet);
 //			errorRates.get(0).add(errorRate);
-//			System.out.println("Complete Naive Bayes");
-//			
-//			Classifier j48 = (Classifier)new J48();
-//			errorRate = getErrorRate(j48, trainingSet, testingSet);
-//			errorRates.get(1).add(errorRate);
-//			System.out.println("Complete Decision Tree");
+//			System.out.printf("Naive Bayes: %.4f", errorRate);
+//			System.out.println();
 			
-			Classifier logistic = (Classifier)new Logistic();
-			errorRate = getErrorRate(logistic, trainingSet, testingSet);
-			errorRates.get(2).add(errorRate);
-			System.out.println("Complete Logistic Regression");
+			Classifier j48 = (Classifier)new J48();
+			errorRate = getErrorRate(j48, trainingSet, testingSet);
+			errorRates.get(1).add(errorRate);
+			System.out.printf("Decision Tree: %.4f", errorRate);
+			System.out.println();
 			
-			Classifier smo = (Classifier)new SMO();
-			errorRate = getErrorRate(smo, trainingSet, testingSet);
-			errorRates.get(3).add(errorRate);
-			System.out.println("Complete Support Vector Machine");
+//			Classifier logistic = (Classifier)new LMT();
+//			errorRate = getErrorRate(logistic, trainingSet, testingSet);
+//			errorRates.get(2).add(errorRate);
+//			System.out.printf("Logistic Regression: %.4f", errorRate);
+//			System.out.println();
+//			
+//			Classifier svm = (Classifier)new SMO();
+//			errorRate = getErrorRate(svm, trainingSet, testingSet);
+//			errorRates.get(3).add(errorRate);
+//			System.out.printf("Support Vector Machine: %.4f", errorRate);
+//			System.out.println();
 			
-//			Classifier randomForest = (Classifier)new RandomForest();
-//			errorRate = getErrorRate(randomForest, trainingSet, testingSet);
-//			errorRates.get(4).add(errorRate);
-//			System.out.println("Complete Random Forest");
-//			
-//			AdaBoostM1 adaboost = new AdaBoostM1();
-//			adaboost.setClassifier(new NaiveBayes());
-//			errorRate = getErrorRate1(adaboost, trainingSet, testingSet);
-//			errorRates.get(5).add(errorRate);
-//			System.out.println("Complete AdaBoosting with NB");
-//			
-//			AdaBoostM1 adaboost2 = new AdaBoostM1();
-//			adaboost2.setClassifier(new J48());
-//			errorRate = getErrorRate1(adaboost2, trainingSet, testingSet);
-//			errorRates.get(6).add(errorRate);
-//			System.out.println("Complete AdaBoosting with DT");
+			Classifier randomForest = (Classifier)new RandomForest();
+			errorRate = getErrorRate(randomForest, trainingSet, testingSet);
+			errorRates.get(4).add(errorRate);
+			System.out.printf("Random Forest: %.4f", errorRate);
+			System.out.println();
+			
+			AdaBoostM1 adaboost = new AdaBoostM1();
+			adaboost.setClassifier(new J48());
+			errorRate = getErrorRate(adaboost, trainingSet, testingSet);
+			errorRates.get(5).add(errorRate);
+			System.out.printf("AdaBoosting with DT: %.4f", errorRate);
+			System.out.println();
+			
+			LogitBoost logitBoost = new LogitBoost();
+			logitBoost.setClassifier(new REPTree());
+			errorRate = getErrorRate(logitBoost, trainingSet, testingSet);
+			errorRates.get(6).add(errorRate);
+			System.out.printf("Logit Boost with Regression Tree: %.4f", errorRate);
+			System.out.println();
 		}
 		
 		for (int i = 0; i < 7; i++) {
@@ -160,28 +184,10 @@ public class MultinomialClassifier {
 			}
 			System.out.println();
 		}
+		
 	}
 	
 	private double getErrorRate(Classifier model, Instances trainingSet, Instances testingSet) {
-		try {
-			model.buildClassifier(trainingSet);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		 
-		Evaluation eTest = null;
-		try {
-			eTest = new Evaluation(trainingSet);
-			eTest.evaluateModel(model, testingSet);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return eTest.errorRate();
-	}
-	
-	private double getErrorRate1(AdaBoostM1 model, Instances trainingSet, Instances testingSet) {
 		try {
 			model.buildClassifier(trainingSet);
 		} catch (Exception e) {
@@ -219,11 +225,98 @@ public class MultinomialClassifier {
 		}
 	}
 	
-	public static void main(String[] args) {
+	
+	public void cluster(double epsilon) throws Exception {
+		Collections.shuffle(processedData);
+		int total = this.processedData.size();
+		int trainingSize = (total*8)/10;
+		Instances training = new Instances("Airbnb Users", this.attributes, trainingSize);
+		Instances testing = new Instances("Airbnb Users", this.attributes, total-trainingSize);
+		getInstances(training, 0, trainingSize);
+		getInstances(testing, trainingSize, total);
+		
+		int k = 1;
+		double prevWGSS = 0;
+		SimpleKMeans kmeans = null;
+		while (true) {
+			kmeans = new SimpleKMeans();
+			kmeans.setNumClusters(k);
+			kmeans.buildClusterer(training);
+			
+			DistanceFunction df = kmeans.getDistanceFunction();
+			Instances centroids = kmeans.getClusterCentroids();
+			
+			double WGSS = 0;
+			for (Instance instance: training) {
+				int index = kmeans.clusterInstance(instance);
+				WGSS += df.distance(instance, centroids.get(index));
+			}
+			
+			System.out.printf("%.4f, ", WGSS);
+			if (prevWGSS != 0 && Math.abs(prevWGSS-WGSS)/prevWGSS < epsilon) {
+				break;
+			} else {
+				k++;
+				prevWGSS = WGSS;
+			}
+		}
+		System.out.println();
+		System.out.println(k + ": "  + prevWGSS);
+		
+		Instances centroids = kmeans.getClusterCentroids();
+		System.out.println("Total clusters: " + kmeans.getNumClusters());
+		
+		HashMap<Integer, int[]> cluster2Dest = new HashMap<Integer, int[]>();
+		for (int i = 0; i < centroids.size(); i++) {
+			cluster2Dest.put(i, new int[this.dest2Index.size()]);
+		}
+		
+		for (Instance instance: training) {
+			String dest = instance.stringValue(this.attributes.get(13));
+			//System.out.println(dest);
+			int cluster = kmeans.clusterInstance(instance);
+			int dstIndex = this.dest2Index.get(dest);
+			if (!cluster2Dest.containsKey(cluster)) System.out.println(cluster);
+			cluster2Dest.get(cluster)[dstIndex]++;
+		}
+		
+		HashMap<Integer, String> cluster2Label = new HashMap<Integer, String>();
+		for (int cluster: cluster2Dest.keySet()) {
+			int[] nums = cluster2Dest.get(cluster);
+			int max = 0;
+			String label = "";
+			for (int i = 0; i < nums.length; i++) {
+				if (nums[i] > max) {
+					max = nums[i];
+					label = this.index2Dest.get(i);
+				}
+			}
+			
+			cluster2Label.put(cluster, label);
+		}
+		
+		double incorrect = 0;
+		for (Instance instance: testing) {
+			int cluster = kmeans.clusterInstance(instance);
+			String label = instance.stringValue(this.attributes.get(13));
+			String predictLabel = cluster2Label.get(cluster);
+			if (!label.equals(predictLabel)) {
+				incorrect++;
+			}
+		}
+		System.out.println("Error rate: " + incorrect/(total-trainingSize));
+	}
+	
+	public static void main(String[] args) throws Exception {
 		MultinomialClassifier mc = new MultinomialClassifier();
 		mc.init();
 		System.out.println(new Date());
 		mc.process();
+//		double[] params = {0.003, 0.001, 0.0003, 0.0001, 0.00003, 0.00001};
+//		for (double epsilon: params) {
+//			System.out.println("Current Epsilon: " + epsilon);
+//			mc.cluster(epsilon);
+//		}		
 		System.out.println(new Date());
 	}
 }
