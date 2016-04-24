@@ -1,0 +1,20 @@
+X = [1, 2, 5, 8, 10, 20, 50, 70.987];
+A = [0.4938, 0.4336, 0.3563, 0.2986, 0.3016, 0.3213, 0.2962, 0.2960];
+B = [0.3018, 0.3007, 0.2971, 0.2962, 0.2975, 0.2895, 0.2834, 0.2753];
+C = [0.2961, 0.2961, 0.2961, 0.2961, 0.2961, 0.2961, 0.2961, 0.2961];
+D = [0.2973, 0.2976, 0.2966, 0.2965, 0.2965, 0.2963, 0.2956, 0.2955];
+
+figure;
+hold on;
+grid;
+title('Error Rate based on Instances Number');
+xlabel('Instance Number(K)');
+ylabel('Error Rate (%)');
+plot(X, A, 'r-', 'LineWidth', 2);
+hold on;
+plot(X, B, 'b--*', 'LineWidth', 2);
+hold on;
+plot(X, C, 'k-o', 'LineWidth', 2);
+hold on;
+plot(X, D, 'm--x', 'LineWidth', 2);
+legend('Naive Bayes', 'Decision Tree', 'Logistic Regression','SVM');

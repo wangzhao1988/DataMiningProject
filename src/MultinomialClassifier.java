@@ -4,7 +4,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
+import weka.attributeSelection.AttributeSelection;
+import weka.attributeSelection.PrincipalComponents;
+import weka.attributeSelection.Ranker;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.bayes.NaiveBayes;
@@ -22,12 +26,15 @@ import weka.core.DenseInstance;
 import weka.core.DistanceFunction;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.knowledgeflow.StepManager;
 
 public class MultinomialClassifier {
+	private static final int FOLDS = 10;
 	private List<String> processedData;
 	private ArrayList<Attribute> attributes;
 	private Map<String, Integer> dest2Index;
 	private Map<Integer, String> index2Dest;
+	private Instances data;
 	
 	public MultinomialClassifier() {
 		this.processedData = new ArrayList<String>();
@@ -67,7 +74,8 @@ public class MultinomialClassifier {
 		Attribute att5 = new Attribute("signupMethod", attribute5List);
 		this.attributes.add(att5);
 		
-		Attribute att6 = new Attribute("signupFlow");
+		List<String> attribute6List = new ArrayList<String>(p.attributeMap.get("signupFlow"));
+		Attribute att6 = new Attribute("signupFlow", attribute6List);
 		this.attributes.add(att6);
 		
 		List<String> attribute7List = new ArrayList<String>(p.attributeMap.get("language"));
@@ -101,34 +109,51 @@ public class MultinomialClassifier {
 		List<String> classList = new ArrayList<String>(p.attributeMap.get("destination"));
 		Attribute classAttribute = new Attribute("destination", classList);
 		this.attributes.add(classAttribute);
+		
+		this.data = new Instances("Users", this.attributes, this.processedData.size());
+		getInstances(this.data, 0, this.processedData.size());
 		System.out.println("Loading data succussfully");
 	}
 	
 	public void process() {
 		int totalSize = this.processedData.size();
 //		System.out.println(totalSize);
-		int trainingSize = (totalSize * 8)/10;
+		int trainSize = (totalSize * 8)/10;
+		int testSize = totalSize - trainSize;
 		
 		List<List<Double>> errorRates = new ArrayList<List<Double>>();
 		for (int i = 0; i < 7; i++) {
 			errorRates.add(new ArrayList<Double>());
 		}
 		
-		int[] sizeArray = {1000, 2000, 5000, 8000, 10000, 20000, 50000, trainingSize};
+		int[] sizeArray = {1000, 2000, 5000, 8000, 10000, 20000, 50000, trainSize};
 		
 		for (int i = 0; i < sizeArray.length; i++) {
 			int size = sizeArray[i];
-			Collections.shuffle(processedData);
-			System.out.println("Current training data size: " + size);
-			Instances trainingSet = new Instances("Airbnb Users", this.attributes, size);
-			trainingSet.setClassIndex(this.attributes.size()-1);
-			getInstances(trainingSet, 0, size);
-//			System.out.println("Training size: " + trainingSet.size());
+			System.out.println("Current Size: " + size);
 			
-			Instances testingSet = new Instances("Airbnb Users", this.attributes, totalSize-trainingSize);
+			Random rand = new Random(System.nanoTime());
+			Instances randData = new Instances(this.data);
+			randData.randomize(rand);
+			
+			Instances trainingSet = new Instances(randData, 0, size);
+			trainingSet.setClassIndex(this.attributes.size()-1);
+			
+			Instances testingSet = new Instances(randData, size, testSize);
 			testingSet.setClassIndex(this.attributes.size()-1);
-			getInstances(testingSet, trainingSize, totalSize);
-//			System.out.println("Testing size: " + testingSet.size());
+			
+			// feature selection
+			AttributeSelection selector = featureSelection(trainingSet);
+			if (selector != null) {
+				try {
+					trainingSet = selector.reduceDimensionality(trainingSet);
+					testingSet = selector.reduceDimensionality(testingSet);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			System.out.println("Feature Selection...");
 			
 			double errorRate = 0;
 			
@@ -187,6 +212,21 @@ public class MultinomialClassifier {
 		
 	}
 	
+	private AttributeSelection featureSelection(Instances instances) {
+		AttributeSelection selector = new AttributeSelection();
+		PrincipalComponents pca = new PrincipalComponents();
+		Ranker ranker = new Ranker();
+		selector.setEvaluator(pca);
+		selector.setSearch(ranker);
+		try { 
+		    selector.SelectAttributes(instances);
+		    return selector;
+		} catch (Exception e ) {
+		    e.printStackTrace();
+		}
+		return null;
+	}
+	
 	private double getErrorRate(Classifier model, Instances trainingSet, Instances testingSet) {
 		try {
 			model.buildClassifier(trainingSet);
@@ -194,7 +234,7 @@ public class MultinomialClassifier {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 
+				 
 		Evaluation eTest = null;
 		try {
 			eTest = new Evaluation(trainingSet);
@@ -214,8 +254,6 @@ public class MultinomialClassifier {
 			for (int attIndex = 0; attIndex < fields.length; attIndex++) {
 				if (attIndex == 3) {
 					instance.setValue(this.attributes.get(attIndex), Double.parseDouble(fields[attIndex]));
-				} else if (attIndex == 5) {
-					instance.setValue(this.attributes.get(attIndex), Integer.parseInt(fields[attIndex]));
 				} else {
 //					System.out.println("Attribute: " + attIndex + " " + fields[attIndex]);
 					instance.setValue(this.attributes.get(attIndex), fields[attIndex]);

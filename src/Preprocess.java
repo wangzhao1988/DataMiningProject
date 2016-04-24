@@ -35,12 +35,21 @@ public class Preprocess {
 	private static final int FIRST_BROWSER = 14;
 	private static final int COUNTRY_DESTINATION = 15;
 	
+	private static final String[] attributes = {
+			"booking2CreateLag", "booking2ActiveLag", "gender", "age", "signupMethod",
+			"signupFlow", "language", "channel", "provider", "tracked", "signupApp",
+			"deviceType", "browser", "destination"
+	};
+	
 	public Map<String, Set<String>> attributeMap = new HashMap<String, Set<String>>();
+	public List<String> processedData;
 	public Map<String, Integer> destinationMap = new HashMap<String, Integer>();
-	public List<String> processedData; 
+	 
 	
 	private double[] condMean = new double[11];
 	private double[] count = new double[11];
+	private double mean = 0;
+	private double stdev = 0;
 	
 	
 	private class Example {
@@ -157,18 +166,9 @@ public class Preprocess {
 	
 	public Preprocess() {
 		this.processedData = new ArrayList<String>();
-		this.attributeMap.put("booking2CreateLag", new HashSet<String>());
-		this.attributeMap.put("booking2ActiveLag", new HashSet<String>());
-		this.attributeMap.put("gender", new HashSet<String>());
-		this.attributeMap.put("signupMethod", new HashSet<String>());
-		this.attributeMap.put("language", new HashSet<String>());
-		this.attributeMap.put("channel", new HashSet<String>());
-		this.attributeMap.put("provider", new HashSet<String>());
-		this.attributeMap.put("tracked", new HashSet<String>());
-		this.attributeMap.put("signupApp", new HashSet<String>());
-		this.attributeMap.put("deviceType", new HashSet<String>());
-		this.attributeMap.put("browser", new HashSet<String>());
-		this.attributeMap.put("destination", new HashSet<String>());
+		for (String attribute: Preprocess.attributes) {
+			this.attributeMap.put(attribute, new HashSet<String>());
+		}
 		this.destinationMap.put("AU", 0);
 		this.destinationMap.put("CA", 1);
 		this.destinationMap.put("DE", 2);
@@ -203,6 +203,7 @@ public class Preprocess {
 				this.attributeMap.get("booking2ActiveLag").add(example.booking2ActiveLag);
 				this.attributeMap.get("gender").add(example.gender);
 				this.attributeMap.get("signupMethod").add(example.signupMethod);
+				this.attributeMap.get("signupFlow").add(Integer.toString(example.signupFlow));
 				this.attributeMap.get("language").add(example.language);
 				this.attributeMap.get("channel").add(example.channel);
 				this.attributeMap.get("provider").add(example.provider);
@@ -243,6 +244,17 @@ public class Preprocess {
 				int index = this.destinationMap.get(example.destination);
 				example.age = this.condMean[index];
 			}
+			this.mean += example.age;
+			this.stdev += example.age * example.age;
+		}
+		
+		int num = dataList.size();
+		this.mean /= num;
+		this.stdev = Math.sqrt(this.stdev/num - (this.mean*this.mean));
+//		System.out.println(mean + " " + stdev);
+		
+		for (Example example: dataList) {			
+			example.age = (example.age-mean)/stdev;
 			this.processedData.add(example.toString());
 		}
 	}
@@ -250,10 +262,19 @@ public class Preprocess {
 	
 	public static void main(String[] args) {
 		Preprocess p = new Preprocess();
-		System.out.println("Total intances: " + p.processedData.size());
-		for (String key: p.attributeMap.keySet()) {
-			System.out.println(p.attributeMap.get(key));
+//		System.out.println("Total intances: " + p.processedData.size());
+//		for (String key: p.attributeMap.keySet()) {
+//			System.out.println(p.attributeMap.get(key));
+//		}
+		
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < Preprocess.attributes.length; i++){
+			if (i != 0) {
+				builder.append(Preprocess.TOKEN);
+			}
+			builder.append(Preprocess.attributes[i]);
 		}
+		System.out.println(builder.toString());
 		
 		for (String example: p.processedData) {
 			System.out.println(example.toString());

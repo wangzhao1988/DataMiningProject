@@ -1,0 +1,20 @@
+X = [1, 2, 5, 8, 10, 20, 50, 70.987];
+A = [0.3888, 0.3875, 0.3922, 0.3822, 0.3817, 0.3635, 0.3402, 0.3275];
+B = [0.3018, 0.3007, 0.2971, 0.2961, 0.2975, 0.2895, 0.2833, 0.2753];
+C = [0.3520, 0.3035, 0.3065, 0.3058, 0.3050, 0.3070, 0.3273, 0.3691];
+D = [0.2445, 0.2299, 0.2259, 0.2248, 0.2239, 0.2240, 0.2231, 0.2230];
+
+figure;
+hold on;
+grid;
+title('Error Rate based on Instances Number');
+xlabel('Instance Number(K)');
+ylabel('Error Rate (%)');
+plot(X, A, 'r-', 'LineWidth', 2);
+hold on;
+plot(X, B, 'b--*', 'LineWidth', 2);
+hold on;
+plot(X, C, 'k-o', 'LineWidth', 2);
+hold on;
+plot(X, D, 'm--x', 'LineWidth', 2);
+legend('Decision Tree', 'Random Forest', 'AdaBoost + DT', 'Gradient Boost + DT');
