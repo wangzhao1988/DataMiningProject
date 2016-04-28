@@ -240,6 +240,7 @@ GB & 2318 \\ \hline
 IT & 2827 \\ \hline
 NL & 757 \\ \hline
 PT & 217 \\ \hline
+US &  62263 \\ \hline
 other & 10075 \\
 \hline\end{tabular}
 \end{table}
@@ -275,19 +276,27 @@ When comes to average review scores, most of countries get over score of 90. BM,
 
 \FloatBarrier
 \section{Proposed Algorithmic Approach}
-Using collaborative filtering to aggregate the similar users based on their first booking on Airbnb. The similarity between users is measured by cosine of the angle between the two vectors which indicate users? properties. Dimensionality reduction should be applied to reduce computational complexity and speed up the algorithm.
+Using collaborative filtering to aggregate the similar users based on their first booking on Airbnb. The similarity between users is measured by cosine of the angle between the two vectors which indicate user properties. Dimensionality reduction should be applied to reduce computational complexity and speed up the algorithm.
 
 \subsection{Data preprocess}
+Since each 
+
 
 \begin{table}[!htb]
 \centering
 \caption{Data Preprocess}
 \label{table:preprocess}
-\begin{tabular}{|c|c|l|} \hline
+\begin{tabular}{|c|l|} \hline
 Processed Attribute & Description\\ \hline
-Time between Account Created \& First Booking &  \\ \hline
-Time between First Active \& First Booking &  \\ \hline
-Age &  \\ \hline
+\shortstack{Lag between date\_first\_booking \\ and date\_account\_created} & 
+\shortstack[l]{Divided into 4 categories\: \\ =0, <0, >0, NA.}\\ \hline
+\shortstack{Lag between date\_first\_booking \\ and timestamp\_first\_active} & 
+\shortstack[l]{Divided into 3 categories\: \\ =0, >0, NA}\\ \hline
+Age & 
+\shortstack[l]{Replace the missing values \\
+with the conditional mean; \\
+scale the age with mean \\
+and standard variance} \\ \hline
 Others & Original value \\
 \hline\end{tabular}
 \end{table}
