@@ -159,18 +159,18 @@ print('X_train: %s, X_valid: %s, X_test: %s \n' %(X_train.shape, X_valid.shape,
 
 #Defining the classifiers
 clfs = {
-        # 'LR'  : LogisticRegression(random_state=random_state),
+        'LR'  : LogisticRegression(random_state=random_state),
         # 'SVM' : SVC(probability=True, random_state=random_state),
         'RF'  : RandomForestClassifier(n_estimators=100, n_jobs=-1,
                                        random_state=random_state),
         'GBM' : GradientBoostingClassifier(n_estimators=50,
                                            random_state=random_state),
-        # 'DT'  : tree.DecisionTreeClassifier(criterion="entropy"),
-        'ADA' : AdaBoostClassifier(tree.DecisionTreeClassifier(criterion="entropy"), n_estimators=50,
-                                   random_state=random_state),
-        # 'ETC' : ExtraTreesClassifier(n_estimators=100, n_jobs=-1,
-        #                              random_state=random_state),
-        'KNN' : KNeighborsClassifier(n_neighbors=30)}
+        'DT'  : tree.DecisionTreeClassifier(criterion="entropy"),
+        # 'ADA' : AdaBoostClassifier(tree.DecisionTreeClassifier(criterion="entropy"), n_estimators=50,
+        #                            random_state=random_state),
+        'ETC' : ExtraTreesClassifier(n_estimators=100, n_jobs=-1,
+                                     random_state=random_state),
+        'KNN' : KNeighborsClassifier(n_neighbors=50)}
 
 #predictions on the validation and test sets
 p_valid = []
@@ -237,3 +237,16 @@ y_ccB = cc_optB.predict(XT)
 y_ccB_all = cc_optB.predict_proba(XT)
 print('{:20s} {:2s} {:1.7f}'.format('Calibrated_EN_optB:', 'error rate  =>', 1-accuracy_score(y_test, y_ccB)))
 print('{:20s} {:2s} {:1.7f}'.format('Calibrated_EN_optB:', 'log loss  =>', log_loss(y_test, y_ccB_all)))
+
+w_final = [2.0/13, 4.0/13, 2.0/13, 5.0/13]
+XX = np.hstack([y_enA_all, y_ccA_all, y_enB_all, y_ccB_all])
+en3 = EN_optA(n_classes)
+en3.fit(XX, y_valid)
+y_final_all = en3.predict_proba(XX)
+# y_final_all = y_enA_all*w_final[0] + y_ccA_all*w_final[1] + y_enB_all*w_final[2] + y_ccB_all*w_final[3]
+y_final = []
+for row in y_final_all:
+    y_final.append(np.argmax(row))
+
+print('{:20s} {:2s} {:1.7f}'.format('3rd_layer:', 'error rate  =>', 1-accuracy_score(y_test, y_final)))
+print('{:20s} {:2s} {:1.7f}'.format('3rd_layer:', 'logloss  =>', log_loss(y_test, y_final_all)))

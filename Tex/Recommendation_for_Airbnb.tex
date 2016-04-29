@@ -348,7 +348,74 @@ Others & Original value \\
 \label{fig:k means}
 \end{figure}
 
+\FloatBarrier
+\subsection{Three Layer Ensemble}
+In previous section, results from basic ensemble methods didn't improved significantly from individual classifier results, so we tried to take advantage of different ensemble methods to build this three layer Ensemble methods\cite{3layer}.
+
+First of all, in order to perform multilayer Ensemble, we need to partition dataset into 3 parts: training set 64\%, validation set 16\%, testing set 20\%. And We will use X to denote features or predictions, y to denote labels.
+
+For the first layer, we have used 6 individual classifiers: Logistic Regression, Random Forrest, Gradient Boosting, Deceision Tree, Extra Tree, K Nearest Neighbour. And all classifiers have been applied twice. First, Classifiers are trained on X\_train, y\_train and used to predict the class probabilities of X\_valid. Next, Classifiers are trained on X = X\_train + X\_valid, y = y\_train + y\_valid and used to predict the class probabilities of X\_test.
+
+For the second layer, the predictions on X\_valid from first layer are concatenated and used to create a new training set XV, y\_valid. The predictions on X\_test are concatenated to create a new test set XT, y\_test. Then we train two following ensemble methods on XV, y\_valid, and make predictions on XT.
+
+First ensemble method is denoted as ENA, ENA computes optimized weights for each Prediction X made from first layer classifiers such that minimizes log\_loss of test result.
+
+Second ensemble method is denoted as ENB, ENB is similar to ENA, but the weights will be assigned with respect to the number of classes we have. For example, X1,X2,...,Xn is the set of predictions given, for each Xi = Xi1,Xi2,...,Xim, where m is the number of classes, and assign weights to each predictions with respect to different classes.
+
+And in the end of this layer, we apply isotonic calibrated classifier obtained from scikit-learn package in python to genearate two new classifiers. So in second layer, we have obtained two ensemble classifiers and two isotonic calibrated classifier.
+
+Then comes to third layer, we assign arbitrarily weights to each classifiers we got from last layer, and combine them into a new classifier. After trying few sets of weights, we found weights [2/13, 4/13, 2/13, 5/13] for [ENA, calibrated ENA, ENB, calibrated ENB] has lowered log loss. We should trying to test more weight distributions programmatically in order to find the best one, or trying to incorporate some statistical techniques here for covering wider range of weight distributions, but due to the time limits, this weight distribution is by far the best value for the result.
+
+The final results for each layers are shown in the tables. Noticed that for first layer results, Gradient Boosting classifier has produced much better results compare with other classifiers we used in this experiment, it's bad for ensemble method since weight will be assigned heavily to Gradient Boosting classifier, other classifiers might get nealy zero weights,  thus the ensemble methods might not improve a lot from the result of Gradient Boosting classifier. 
+
+The results from second layer proves this, for two ensemble methods ENA and ENB, while the log loss decreased for a very small amount, the error rate still remains the same, the calibrated ensemble methods improves a little on the error rate, but have increased on log loss. When comes to third layer results, noticed that althogh the log loss has decreased from 0.875 to 0.872, error rate however has increased from 0.2230 to 0.2231, so it's not very clear if this classifier has really improved the result from single Gradient Boosting classifier.
+
+In the future version of this work, we might want to try more different classifiers to see if there's any other independent classifiers that can match with the result from Gradient Boosting classifier, because only then the ensemble methods can take advantage of few different classifiers and provide more preceise results.
+
+\begin{table}[ht]
+\centering
+\caption{Layer one results}
+\label{layer1}
+\begin{tabular}{|l|l|l|}
+\hline
+Classifier          & log\_loss & error\_rate \\ \hline
+KNN                 & 2.3201224 & 0.2854003   \\ \hline
+Gradient Boosting   & 0.8753181 & 0.22308     \\ \hline
+Extra tree          & 6.0773485 & 0.3299713   \\ \hline
+Random Forest       & 3.7757482 & 0.2752578   \\ \hline
+Logistic Regression & 1.1450557 & 0.29605     \\ \hline
+DT                  & 8.9571967 & 0.3264777   \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Layer two results}
+\label{layer2}
+\begin{tabular}{|l|l|l|}
+\hline
+Methods           & log\_loss & error\_rate \\ \hline
+EN\_A             & 0.875309  & 0.22308     \\ \hline
+Calibrated\_EN\_A & 0.8933696 & 0.2230236   \\ \hline
+EN\_B             & 0.875449  & 0.22308     \\ \hline
+Calibrated\_EN\_B & 0.8932008 & 0.2230236   \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Layer three results}
+\label{layer3}
+\begin{tabular}{|l|l|}
+\hline
+log\_loss & error\_rate \\ \hline
+0.8726795 & 0.2231927   \\ \hline
+\end{tabular}
+\end{table}
+
+\FloatBarrier
 \section{Conclusion}
+Three layer ensemble methods should improve its performance by trying different classifiers such that their results can match with Gradient Boosting results, also weight distributions in third layer should be explored thoroughly to find the best result.
 
 \medskip
 
@@ -361,6 +428,7 @@ Others & Original value \\
 \bibitem{cf} L. Ungar and D. Foster, "Clustering Methods for Collaborative Filtering", Proc. Workshop on Recommendation Systems, AAAI Press, 1998.
 \bibitem{item2item} G. Linden, B. Smith, and J. York, "Amazon.com recommendations: item-to-item collaborative filtering", Internet Computing 7:1, 2003, pp. 76-80.
 \bibitem{massive} Leskovec, J., Rajaraman, A., and Ullman, "Mining of Massive Datasets", 2nd Edition, 2004, pp. 307-341.
+\bibitem{3layer} Pons, Sandro Vega., "three\_level\_classification\_architecture", Kaggle, 25 Feb 2016. Web. 28 Apr 2016.
 
 \end{thebibliography}
 %\balancecolumns % GM June 2007

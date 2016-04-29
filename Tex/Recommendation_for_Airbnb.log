@@ -1,41 +1,41 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  26 APR 2016 18:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.30)  29 APR 2016 16:48
 entering extended mode
- restricted \write18 enabled.
- file:line:error style messages enabled.
- %&-line parsing enabled.
-**Recommendation_for_Airbnb.tex
-(./Recommendation_for_Airbnb.tex
-LaTeX2e <2015/01/01>
-Babel <3.9l> and hyphenation patterns for 79 languages loaded.
-(./sig-alternate-05-2015.cls
-(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/epsfig.sty
+**E:/cygwin64/home/Deckard/dm/project/team/DataMiningProject/Tex/Recommendation
+_for_Airbnb.tex
+
+(E:/cygwin64/home/Deckard/dm/project/team/DataMiningProject/Tex/Recommendation_
+for_Airbnb.tex
+LaTeX2e <2015/10/01> patch level 2
+Babel <3.9n> and hyphenation patterns for 69 languages loaded.
+(sig-alternate-05-2015.cls
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\epsfig.sty"
 Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphicx.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/keyval.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphics.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
 Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/trig.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/graphics.cfg
-File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
 Package graphics Info: Driver file: pdftex.def on input line 94.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/pdftex-def/pdftex.def
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count79
@@ -46,10 +46,10 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \epsfxsize=\dimen104
 \epsfysize=\dimen105
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/amssymb.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \@emptytoks=\toks15
 \symAMSa=\mathgroup4
@@ -57,24 +57,24 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsmath.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
 Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip41
 
 For additional information on amsmath, use the `?' option.
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amstext.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
 Package: amstext 2000/06/29 v2.01
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsgen.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks16
 \ex@=\dimen106
 ))
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsbsy.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen107
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsopn.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count80
@@ -125,7 +125,7 @@ m.org ******
 Questions on the style, SIGS policies, etc. to Adrienne Griscti griscti@acm.org
 
 \ACM@basesize=\count92
-(/usr/local/texlive/2015/texmf-dist/tex/latex/comment/comment.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\comment\comment.sty"
 \CommentStream=\write3
 
 Excluding comment 'comment') Excluding comment 'CCSXML'
@@ -133,7 +133,7 @@ Excluding comment 'comment') Excluding comment 'CCSXML'
 \@maxsep=\dimen116
 \@dblmaxsep=\dimen117
 
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
@@ -160,7 +160,7 @@ LaTeX Warning: You have requested document class `sig-alternate-05-2015',
 
 Document Class: sig-alternate 2013/05/12 v2.7 based on acmproc.cls V1.3 <Nov. 3
 0 '99>
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/latexsym.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\latexsym.sty"
 Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
 \symlasy=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
@@ -191,17 +191,17 @@ LaTeX Info: Redefining \cite on input line 1408.
 \copyrtyr=\toks32
 \acmcopyr=\toks33
 \boilerplate=\toks34
-(/usr/local/texlive/2015/texmf-dist/tex/latex/url/url.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\url\url.sty"
 \Urlmuskip=\muskip11
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-) (./acmcopyright.sty
+) (acmcopyright.sty
 Package: acmcopyright 2014/06/29 v1.2 Copyright statemens for ACM classes
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty"
 Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 
-(/usr/local/texlive/2015/texmf-dist/tex/generic/xkeyval/xkeyval.tex
-(/usr/local/texlive/2015/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+("E:\Program Files (x86)\MiKTeX 2.9\tex\generic\xkeyval\xkeyval.tex"
+("E:\Program Files (x86)\MiKTeX 2.9\tex\generic\xkeyval\xkvutils.tex"
 \XKV@toks=\toks35
 \XKV@tempa@toks=\toks36
 )
@@ -210,43 +210,43 @@ File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )))
 \copyrightetc=\toks37
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/fontenc.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\fontenc.sty"
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/t1enc.def
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\t1enc.def"
 File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
 )
 LaTeX Font Info:    Try loading font information for T1+aer on input line 105.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/ae/t1aer.fd
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aer.fd"
 File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 )))
-(/usr/local/texlive/2015/texmf-dist/tex/latex/placeins/placeins.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\placeins\placeins.sty"
 Package: placeins 2005/04/18  v 2.2
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/epstopdf.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\epstopdf.sty"
 Package: epstopdf 2010/02/09 v2.5 Conversion with epstopdf on the fly (HO)
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/grfext.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
 Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
 
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
 Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
 ))
-(/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
 Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
 
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
 Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
 
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
@@ -255,7 +255,7 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 )))
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+("E:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: LuaTeX not detected.
@@ -267,12 +267,8 @@ Package grfext Info: Graphics extension search list:
 (grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
-
-(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-)))
-(./Recommendation_for_Airbnb.aux)
+))
+(Recommendation_for_Airbnb.aux)
 \openout1 = `Recommendation_for_Airbnb.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
@@ -288,7 +284,7 @@ LaTeX Font Info:    ... okay on input line 53.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
 LaTeX Font Info:    ... okay on input line 53.
 
-(/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
+("E:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count111
 \scratchdimen=\dimen123
@@ -303,17 +299,17 @@ LaTeX Font Info:    ... okay on input line 53.
 \everyMPtoPDFconversion=\toks39
 )
 LaTeX Font Info:    Try loading font information for U+msa on input line 138.
- (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
+ ("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 138.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Try loading font information for U+lasy on input line 138.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/ulasy.fd
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ulasy.fd"
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
 Overfull \hbox (3.89502pt too wide) in paragraph at lines 138--138
@@ -321,7 +317,7 @@ Overfull \hbox (3.89502pt too wide) in paragraph at lines 138--138
  []
 
 LaTeX Font Info:    Try loading font information for T1+ptm on input line 138.
-(/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/t1ptm.fd
+("E:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd"
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
 Excluding 'CCSXML' comment.
@@ -329,22 +325,22 @@ Overfull \hbox (21.13953pt too wide) in paragraph at lines 208--224
 [][] 
  []
 
-[1{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+[1{C:/Users/Zerui Ma/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
 ]
 Package epstopdf Info: Source file: <AgeDistribution.eps>
-(epstopdf)                    date: 2016-04-21 16:12:26
-(epstopdf)                    size: 6850805 bytes
+(epstopdf)                    date: 2016-04-21 15:43:42
+(epstopdf)                    size: 6937731 bytes
 (epstopdf)             Output file: <AgeDistribution-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-04-22 12:28:45
+(epstopdf)                    date: 2016-04-27 17:32:05
 (epstopdf)                    size: 78331 bytes
-(epstopdf)             Command: <repstopdf --outfile=AgeDistribution-eps-conver
-ted-to.pdf AgeDistribution.eps>
+(epstopdf)             Command: <epstopdf --outfile=AgeDistribution-eps-convert
+ed-to.pdf AgeDistribution.eps>
 (epstopdf)             \includegraphics on input line 250.
 Package epstopdf Info: Output file is already uptodate.
 
-<AgeDistribution-eps-converted-to.pdf, id=13, 925.4575pt x 636.3775pt>
+<AgeDistribution-eps-converted-to.pdf, id=12, 925.4575pt x 636.3775pt>
 File: AgeDistribution-eps-converted-to.pdf Graphic file (type pdf)
 
 <use AgeDistribution-eps-converted-to.pdf>
@@ -352,17 +348,17 @@ Package pdftex.def Info: AgeDistribution-eps-converted-to.pdf used on input lin
 e 250.
 (pdftex.def)             Requested size: 216.80472pt x 144.5382pt.
 Package epstopdf Info: Source file: <country-avgPrice.eps>
-(epstopdf)                    date: 2016-04-15 15:15:54
+(epstopdf)                    date: 2016-04-15 11:21:17
 (epstopdf)                    size: 49018 bytes
 (epstopdf)             Output file: <country-avgPrice-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-04-15 15:15:54
+(epstopdf)                    date: 2016-04-15 11:52:31
 (epstopdf)                    size: 31935 bytes
-(epstopdf)             Command: <repstopdf --outfile=country-avgPrice-eps-conve
-rted-to.pdf country-avgPrice.eps>
+(epstopdf)             Command: <epstopdf --outfile=country-avgPrice-eps-conver
+ted-to.pdf country-avgPrice.eps>
 (epstopdf)             \includegraphics on input line 263.
 Package epstopdf Info: Output file is already uptodate.
 
-<country-avgPrice-eps-converted-to.pdf, id=14, 803.0pt x 599.23875pt>
+<country-avgPrice-eps-converted-to.pdf, id=13, 803.0pt x 599.23875pt>
 File: country-avgPrice-eps-converted-to.pdf Graphic file (type pdf)
 
 <use country-avgPrice-eps-converted-to.pdf>
@@ -370,17 +366,17 @@ Package pdftex.def Info: country-avgPrice-eps-converted-to.pdf used on input li
 ne 263.
 (pdftex.def)             Requested size: 216.8129pt x 144.53343pt.
 Package epstopdf Info: Source file: <country-avgRating.eps>
-(epstopdf)                    date: 2016-04-15 15:15:54
+(epstopdf)                    date: 2016-04-15 11:21:17
 (epstopdf)                    size: 55491 bytes
 (epstopdf)             Output file: <country-avgRating-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-04-15 15:15:54
+(epstopdf)                    date: 2016-04-15 12:05:11
 (epstopdf)                    size: 33543 bytes
-(epstopdf)             Command: <repstopdf --outfile=country-avgRating-eps-conv
-erted-to.pdf country-avgRating.eps>
+(epstopdf)             Command: <epstopdf --outfile=country-avgRating-eps-conve
+rted-to.pdf country-avgRating.eps>
 (epstopdf)             \includegraphics on input line 271.
 Package epstopdf Info: Output file is already uptodate.
 
-<country-avgRating-eps-converted-to.pdf, id=15, 803.0pt x 599.23875pt>
+<country-avgRating-eps-converted-to.pdf, id=14, 803.0pt x 599.23875pt>
 File: country-avgRating-eps-converted-to.pdf Graphic file (type pdf)
 
 <use country-avgRating-eps-converted-to.pdf>
@@ -394,113 +390,111 @@ Overfull \hbox (7.70097pt too wide) in paragraph at lines 278--278
  []
 
 
-Overfull \hbox (16.86397pt too wide) in paragraph at lines 287--300
+Overfull \hbox (16.86397pt too wide) in paragraph at lines 289--302
  [][] 
  []
 
 Package epstopdf Info: Source file: <Basic_Classifiers.eps>
-(epstopdf)                    date: 2016-04-19 12:20:35
-(epstopdf)                    size: 21614 bytes
+(epstopdf)                    date: 2016-04-19 13:21:53
+(epstopdf)                    size: 23439 bytes
 (epstopdf)             Output file: <Basic_Classifiers-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-04-19 12:20:35
+(epstopdf)                    date: 2016-04-19 13:21:53
 (epstopdf)                    size: 10847 bytes
-(epstopdf)             Command: <repstopdf --outfile=Basic_Classifiers-eps-conv
-erted-to.pdf Basic_Classifiers.eps>
-(epstopdf)             \includegraphics on input line 307.
+(epstopdf)             Command: <epstopdf --outfile=Basic_Classifiers-eps-conve
+rted-to.pdf Basic_Classifiers.eps>
+(epstopdf)             \includegraphics on input line 309.
 Package epstopdf Info: Output file is already uptodate.
-<Basic_Classifiers-eps-converted-to.pdf, id=26, 562.1pt x 421.575pt>
+<Basic_Classifiers-eps-converted-to.pdf, id=25, 562.1pt x 421.575pt>
 File: Basic_Classifiers-eps-converted-to.pdf Graphic file (type pdf)
 
 <use Basic_Classifiers-eps-converted-to.pdf>
 Package pdftex.def Info: Basic_Classifiers-eps-converted-to.pdf used on input l
-ine 307.
+ine 309.
 (pdftex.def)             Requested size: 216.808pt x 144.54294pt.
 Package epstopdf Info: Source file: <Ensemble_Classifiers.eps>
-(epstopdf)                    date: 2016-04-18 17:18:30
-(epstopdf)                    size: 24477 bytes
+(epstopdf)                    date: 2016-04-19 11:39:44
+(epstopdf)                    size: 26707 bytes
 (epstopdf)             Output file: <Ensemble_Classifiers-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2016-04-19 12:20:35
+(epstopdf)                    date: 2016-04-19 13:21:53
 (epstopdf)                    size: 10747 bytes
-(epstopdf)             Command: <repstopdf --outfile=Ensemble_Classifiers-eps-c
-onverted-to.pdf Ensemble_Classifiers.eps>
-(epstopdf)             \includegraphics on input line 314.
+(epstopdf)             Command: <epstopdf --outfile=Ensemble_Classifiers-eps-co
+nverted-to.pdf Ensemble_Classifiers.eps>
+(epstopdf)             \includegraphics on input line 316.
 Package epstopdf Info: Output file is already uptodate.
 
-<Ensemble_Classifiers-eps-converted-to.pdf, id=27, 562.1pt x 421.575pt>
+<Ensemble_Classifiers-eps-converted-to.pdf, id=26, 562.1pt x 421.575pt>
 File: Ensemble_Classifiers-eps-converted-to.pdf Graphic file (type pdf)
 
 <use Ensemble_Classifiers-eps-converted-to.pdf>
 Package pdftex.def Info: Ensemble_Classifiers-eps-converted-to.pdf used on inpu
-t line 314.
+t line 316.
 (pdftex.def)             Requested size: 216.808pt x 144.54294pt.
 Package epstopdf Info: Source file: <PCA_Classifiers.eps>
-(epstopdf)                    date: 2016-04-23 18:18:00
-(epstopdf)                    size: 25805 bytes
+(epstopdf)                    date: 2016-04-27 17:32:05
+(epstopdf)                    size: 28081 bytes
 (epstopdf)             Output file: <PCA_Classifiers-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-04-25 19:35:49
+(epstopdf)                    date: 2016-04-27 17:32:05
 (epstopdf)                    size: 11880 bytes
-(epstopdf)             Command: <repstopdf --outfile=PCA_Classifiers-eps-conver
-ted-to.pdf PCA_Classifiers.eps>
-(epstopdf)             \includegraphics on input line 321.
+(epstopdf)             Command: <epstopdf --outfile=PCA_Classifiers-eps-convert
+ed-to.pdf PCA_Classifiers.eps>
+(epstopdf)             \includegraphics on input line 323.
 Package epstopdf Info: Output file is already uptodate.
 
-<PCA_Classifiers-eps-converted-to.pdf, id=28, 562.1pt x 421.575pt>
+<PCA_Classifiers-eps-converted-to.pdf, id=27, 562.1pt x 421.575pt>
 File: PCA_Classifiers-eps-converted-to.pdf Graphic file (type pdf)
 
 <use PCA_Classifiers-eps-converted-to.pdf>
 Package pdftex.def Info: PCA_Classifiers-eps-converted-to.pdf used on input lin
-e 321.
+e 323.
 (pdftex.def)             Requested size: 216.808pt x 144.54294pt.
 
-Overfull \hbox (4.21121pt too wide) in paragraph at lines 332--340
+Overfull \hbox (4.21121pt too wide) in paragraph at lines 334--342
  [][] 
  []
 
 Package epstopdf Info: Source file: <K_Means.eps>
-(epstopdf)                    date: 2016-04-22 12:28:45
-(epstopdf)                    size: 1435140 bytes
+(epstopdf)                    date: 2016-04-27 17:32:05
+(epstopdf)                    size: 1453512 bytes
 (epstopdf)             Output file: <K_Means-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-04-22 12:28:45
+(epstopdf)                    date: 2016-04-27 17:32:05
 (epstopdf)                    size: 36789 bytes
-(epstopdf)             Command: <repstopdf --outfile=K_Means-eps-converted-to.p
-df K_Means.eps>
-(epstopdf)             \includegraphics on input line 344.
+(epstopdf)             Command: <epstopdf --outfile=K_Means-eps-converted-to.pd
+f K_Means.eps>
+(epstopdf)             \includegraphics on input line 346.
 Package epstopdf Info: Output file is already uptodate.
-<K_Means-eps-converted-to.pdf, id=29, 562.1pt x 421.575pt>
+<K_Means-eps-converted-to.pdf, id=28, 562.1pt x 421.575pt>
 File: K_Means-eps-converted-to.pdf Graphic file (type pdf)
 
 <use K_Means-eps-converted-to.pdf>
-Package pdftex.def Info: K_Means-eps-converted-to.pdf used on input line 344.
+Package pdftex.def Info: K_Means-eps-converted-to.pdf used on input line 346.
 (pdftex.def)             Requested size: 216.808pt x 144.54294pt.
  [3 <./country-avgRating-eps-converted-to.pdf> <./Basic_Classifiers-eps-convert
 ed-to.pdf> <./Ensemble_Classifiers-eps-converted-to.pdf> <./PCA_Classifiers-eps
--converted-to.pdf>] [4
+-converted-to.pdf>] [4 <./K_Means-eps-converted-to.pdf>] [5
 
- <./K_Means-eps-converted-to.pdf>] (./Recommendation_for_Airbnb.aux) ) 
+] (Recommendation_for_Airbnb.aux) ) 
 Here is how much of TeX's memory you used:
- 3253 strings out of 493089
- 43063 string characters out of 6134842
- 119292 words of memory out of 5000000
- 6615 multiletter control sequences out of 15000+600000
- 54416 words of font info for 79 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 42i,11n,35p,1477b,463s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/loc
-al/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2015
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2015/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2015/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2015/texmf-dist/
-fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/t
-ype1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/ur
-w/times/utmb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/ut
-mr8a.pfb>
-Output written on Recommendation_for_Airbnb.pdf (4 pages, 313461 bytes).
+ 3252 strings out of 493634
+ 42949 string characters out of 3141303
+ 118292 words of memory out of 3000000
+ 6515 multiletter control sequences out of 15000+200000
+ 54416 words of font info for 79 fonts, out of 3000000 for 9000
+ 1025 hyphenation exceptions out of 8191
+ 42i,11n,35p,1540b,463s stack positions out of 5000i,500n,10000p,200000b,50000s
+{E:/Program Files (x86)/MiKTeX 2.9/fonts/enc
+/dvips/fontname/8r.enc}<E:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmbx9.pfb><E:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmmi9.pfb><E:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmr12.pfb><E:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmr8.pfb><E:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
+9.pfb><E:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvb8a.pfb><E
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/helvetic/uhvr8a.pfb><E:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><E:/Program Files (x8
+6)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb>
+Output written on Recommendation_for_Airbnb.pdf (5 pages, 333771 bytes).
 PDF statistics:
- 97 PDF objects out of 1000 (max. 8388607)
- 64 compressed objects within 1 object stream
+ 98 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
