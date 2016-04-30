@@ -70,6 +70,7 @@
 % --- End of Author Metadata ---
 
 \title{Recommendation Algorithms for User First Booking on Airbnb}
+
 %
 % You need the command \numberofauthors to handle the 'placement
 % and alignment' of the authors beneath the title.
@@ -137,7 +138,7 @@
 
 \maketitle
 \begin{abstract}
-In this paper, we aim to design an optimal recommendation algorithm to predict which country the Airbnb new users will make their first booking. To solve this problem, some basic classifiers are used and evaluated by their error rates. To improve the performance of the weak learners, the ensemble methods are also introduced. We also design a recommendation algorithm based on collaborative filtering and obtain the better performance. Meanwhile a 3-layer ensemble framework based on basic classifiers and ensemble methods is introduced.
+In this paper, we aim to design an optimal recommendation algorithm to predict which country new users on Airbnb will make their first booking. A variety of methods including basic classifiers, ensemble methods, recommendation algorithms and 3-layer ensemble framework are used to solve this problem. To start off, some basic classifiers are used for error rate evaluations. Ensemble methods are then introduced to improve the performance of the weak learners. In addition, a recommendation algorithm based on collaborative filtering is designed to obtain a better performance. In order to further improve the result, a 3-layer ensemble framework that combines on basic classifiers and ensemble methods is introduced.
 \end{abstract}
 
 
@@ -190,17 +191,18 @@ In this paper, we aim to design an optimal recommendation algorithm to predict w
 \section{Introduction}
 Data mining is the process of discovering interesting patterns from massive amounts of data. As a knowledge discovery process, it typically involves data cleaning, data integration, data selection, data transformation, pattern discovery, pattern evaluation, and knowledge presentation\cite{data mining}. The science of learning plays a key role in the fields of data mining, statistics and artificial intelligence, intersecting with areas of engineering and other disciplines\cite{statistical}.  In a typical scenario, a quantitative or categorical outcome measurement is predicted based on a set of features.
 
-Recommendation algorithms are a kind of learning algorithms which are widely used on e-commerce web sites.  they use input about a customer\'s interests to generate a list of recommended items. Most recommendation algorithms are designed for finding similar customers, where they aggregate items from the similar customers, eliminates items the user has already purchased or rated, and recommends the remaining items to the user. The popular versions of these algorithms are collaborative filtering and cluster models. In the collaborative filtering, the similarity of customers is measured by the cosine of the angle between the two vectors which represent users' interests\cite{analysis}. Using this algorithm to generate recommendations is computationally expensive, but it can be released by dimensionally reduction techniques\cite{collaborative}. To find the similar customers to the user, cluster models divide the customer base into many segments and treat the task as a classification problem\cite{clustering}.  Some algorithms classify users into multiple segments and describe the strength of each relationship\cite{cf}. Besides grouping the user to the similar customers, other algorithms such as search-based methods and item-to-item collaborative filtering focus on finding similar items\cite{item2item}. Search- or content-based methods treat the recommendations problem as a search for related items\cite{massive}.
+Recommendation algorithms are a type of learning algorithms that are widely used on e-commerce websites.  They use customer interests as input to generate a list of recommended items. Most recommendation algorithms are designed for finding similar customers, then they aggregate items from similar customers, eliminates items the user has already purchased or rated, and recommends the remaining items to the user. The popular versions of these algorithms are collaborative filtering and cluster models. In collaborative filtering, the similarity of customers is measured by the cosine of the angle between the two vectors which represent users' interests\cite{analysis}. Using this algorithm to generate recommendations is computationally expensive, but it can be released by dimensionally reduction techniques\cite{collaborative}. To find the similar customers to the user, cluster models divide the customer base into many segments and treat the task as a classification problem\cite{clustering}.  Some algorithms classify users into multiple segments and describe the strength of each relationship\cite{cf}. In addition to grouping the user to the similar customers, other algorithms such as search-based methods and item-to-item collaborative filtering focus on finding similar items\cite{item2item}. Search- or content-based methods treat the recommendations problem as a search for related items\cite{massive}.
 
-User experience is now a critical factor to keep users and attract new users among web applications. That is the reason Airbnb wants to provide personalized and unique experience for its new users, thus Airbnb need an effective recommendation system to recommend a country for first-time booking.
+Nowadays, user experience has become an increasingly critical factor for a company to keep existing users and attract new users among various competitors. By building an effective recommendation system to predict where a new user will book his or her first travel destination, Airbnb can provide a personalized and unique experience for its new users, reduce the average first booking time, and gain a better understanding of the business demand. 
 
-However, the main challenge here is that Airbnb doesn't have the travel history or other type of the traveling data of new users, the only data available here is basic feature such as age, gender, session log etc., basically like a white paper to a recommendation system. While a typical recommendation system might make recommendation based on a few strongly related features, the system designed here need to focus on correctly classify similar users first, then trying to make recommendation with some relatively strong features. And that is why we choose collaborative filtering as our first-step approach.
+
+However, the main challenge here is that Airbnb does not have the travel history or other type of traveling data from new users. The only data available here are basic features such as age, gender, session log etc., which is basically like a white paper to a recommendation system. While a typical recommendation system might make recommendations based on a few strongly related features, the system designed here need to focus on correctly classifying similar users first, then trying to make recommendation with some relatively strong features. This is the primary reason we choose collaborative filtering as our first-step approach.
 
 \section{Dataset Description}
-In this section, the data sets which are applied for the recommendation algorithms are introduced. The data is  consisted of two parts: the first one is the list of users\' first booking destinations as well as their personal information and web session records; the other is the aggregated public host information dataset which is sourced from the Airbnb site. By analyzing the statistics of the source data, we can have an overview of the entire data and decide how to do the process and apply the data for the recommendation algorithms.
+In this section, the data sets used for the recommendation algorithms are introduced. The data are consisted of two parts: the first one is the list of users' first booking destinations as well as their personal information and web session records; the second is the aggregated public host information dataset sourced from the Airbnb site. By analyzing the statistics and features of the source data, we are able to have an overview of the entire data and decide how to process and apply the data for the recommendation algorithms.
 
 \subsection{User data set}
-In the list of user first booking, each user is specified by a unique string id and each record contains multiple types of properties for that user, including account created time, age, sign up device, etc. There exists missing values in each fields, which should be addressed before training recommendation model. The users whose destination countries are unavailable (indicated as NDF) are also need to be filtered out since we are going to predict the destination countries for those users. The details of user properties are described as Table.\ref{table:users}.
+In the list of user first booking file, each user is specified by a unique string id and each record contains multiple types of properties for that user, including account created time, age, sign up device, etc. Each field contains missing and inconsistent values which should be addressed before training the recommendation model. The users whose destination countries are unavailable (indicated as NDF) also need to be filtered out since those are the users we are going to predict where their destination countries are. The details of user properties are described as Table.\ref{table:users}.
 
 \begin{table}[!htb]
 \caption{User Data Statistics}
@@ -223,7 +225,7 @@ first\_browser  & categorical & \shortstack[l]{Chrome, Safari, Firefox, etc.} \\
 \hline \end{tabular}
 \end{table}
 
-After dropping the records without specific destinations, the numbers of the users for each country are shown as Table.\ref{table:destination} described. The instances with specific destinations are the data we should focus on to build the predication model for new users. From the Table.\ref{table:destination} we can conclude that most users choose U.S. as their first booking destination since Airbnb is a company in U.S. At sometime, there is a lot of users traveling to the countries which are listed in those specific countries (indicated as other).
+After dropping the records without specific destinations, the number of the users for each country are shown as Table.\ref{table:destination} described. The instances with specific destinations are the data we should focus on to build the predication model for new users. From the Table.\ref{table:destination} we conclude that most users choose U.S. as their first booking destination since Airbnb is a company in the U.S. There are quite a number of users traveling to the countries that are not listed in those specific countries (indicated as other).
 
 \begin{table}[!htb]
 \centering
@@ -245,7 +247,7 @@ other & 10075 \\
 \hline\end{tabular}
 \end{table}
 
-The Figure.\ref{fig:age distribution} describe the age distribution of the users in the list. 
+The Figure.\ref{fig:age distribution} describes the age distribution of the users in the list. It can be seen that users between the age of 25-45 are more likely to travel. 
 
 \begin{figure}[!htb]
 \centering
@@ -254,11 +256,12 @@ The Figure.\ref{fig:age distribution} describe the age distribution of the users
 \label{fig:age distribution}
 \end{figure}
 
+
 \FloatBarrier
 \subsection{Hosts data set}
-The other data set is about detailed information of host listings among 16 countries available on Airbnb, although it covers almost all the countries in new user data set, but PT(Portugal) listing data is missing here.
+The other data set contains more detailed information of host listings among 16 countries available on Airbnb. It covers almost all the countries corresponding to the new user data set, but listing data from PT(Portugal) is missing.
 
-This listing data set contains most of the public information available on Airbnb, and lots of features such as listing price, listing rating score, host registration information and neighbourhood etc., may help recommendation system identify better listings among target country for new users. However, due to the limitation of new user data, the recommendation on this part is most likely to be based on features weighted by common sense: highest rated, best available price etc..
+This listing data set contains most of the publicly available information on Airbnb. Lots of features such as listing price, listing rating score, host registration information and neighborhood etc., may help recommendation system identify better listings among target countries for new users. However, due to the limitation of the new user data, the recommendation on this part is most likely to be based on features weighted by common sense such as highest rated, best available price etc..
 
 \begin{figure}[!htb]
 \centering
@@ -266,7 +269,7 @@ This listing data set contains most of the public information available on Airbn
 \caption{Average price distribution among countries}
 \end{figure}
 
-Since listing price is showed in dollar, so the average listing price distribution is influenced by currency exchange rate in some extent, but besides that fact, the average listing price definitely reflects the popularity of these destination countries. BM(Bermuda) is a typical high-end vacation hot spot, but it's surprised to see UY(Uruguay) has such a high average price, maybe because the retrived UY listings is very limited. Other than these two countries, AU and US are the most expensive countries to go on Airbnb. It's interesting to see AU has higher average listing price over US, a possible explaination for this could be the number of listings in US is much greater than AU's, thus competetion over the host has lowered the average listing price in US.
+Since listing price is showed in dollar, the average listing price distribution is influenced by currency exchange rate in some extent. In addition to this fact, the average listing price definitely reflects the popularity of these destination countries. BM(Bermuda) is a typical high-end vacation hot spot, but it is surprising to see UY(Uruguay) has such a high average price, maybe due to the fact that the retrieved UY listings is very limited. Other than these two countries, AU and US are the most expensive countries to go on Airbnb. It is interesting to see AU has a higher average listing price than US. A possible explanation for this could be the number of listings in US is much greater than AU's, thus competition over the host has lowered the average listing price in the US.
 
 \begin{figure}[!htb]
 \centering
@@ -274,11 +277,11 @@ Since listing price is showed in dollar, so the average listing price distributi
 \caption{Average rating score distribution among countries}
 \end{figure}
 
-When comes to average review scores, most of countries get over score of 90. BM, UY and VU receives average score of 100, but since the number of listing of these 3 countries in this data set is very limited, it probably has large bias here. Besides these 3 countries, US and NL is probably best reviewed place to go on Airbnb, IT and ES is the worst reviewed, but still has average score of over 89.
+When comes to average review scores, most of countries get scores over 90. BM, UY and VU receives average scores of 100, but since the number of listing for these 3 countries in this data set is very limited, it probably has a large bias here. Besides these 3 countries, US and NL are probably best reviewed places to go on Airbnb, IT and ES are the worst reviewed, but still has average scores of over 89.
 
 \FloatBarrier
 \section{Proposed Algorithmic Approach}
-In this section, we introduce the learning algorithms we have used to implement the recommendation and evaluate their performance. At first, some basic classifiers are used and compared to find the optimal one which could do the predictions with the lowest error rate. Based on that some ensemble technicals such as boosting algorithm, random forest and feature selection are involved to improve the performance. Meanwhile we also use the collaborative filtering to build the recommendation model, in which the training dataset is clustered into \emph{k} clusters and each testing instance is label by its closest cluster. A 3-layer ensemble classifier framework is also introduced to achieve performance improvements.
+In this section, we introduce the learning algorithms used to implement the recommendation and evaluate their performances. At first, some basic classifiers are used and compared to find the optimal one for predictions with the lowest error rate. Based on that result, some ensemble technicals such as boosting algorithm, random forest and feature selection are involved to improve the performance. Meanwhile we also use collaborative filtering to build a recommendation model, in which the training dataset is clustered into \emph{k} clusters and each testing instance is label by its closest cluster. A 3-layer ensemble classifier framework is also introduced to achieve performance improvements.
 
 \subsection{Data preprocess}
 The original properties for each users involve different data types, includes date and timestamp, so we need to convert all the features into numerical or categorical. As described in Table \ref{table:preprocess}, we compute the lag days between \emph{date\_first\_booking} and \emph{date\_account\_created} and divide the result into four categories [=0, < 0, >0, NA]. Some operation is also taken on \emph{date\_first\_booking} and \emph{timestamp\_first\_active}. For the age attribute, the missing values are replaced by the conditional mean and all the values are scaled by mean and standard deviation. Since the values in \emph{signup\_flow} are integers from 0 to 25, this attribute is considered as categorical when training the model. The training and testing set occupy 80\% and 20\% of entire data set.
@@ -305,7 +308,7 @@ Others & Original value \\
 
 
 \subsection{Basic and Ensemble Classifiers}
-Initially we use \emph{WEKA} package to implement the basic classifiers including decision tree,  naive Bayes and support vector machine (SVM). The comparison of error rates shows that C4.5 decision tree has the best performance among these classifiers, whose error rate is much lower than other classifiers. To verify the results we also implemented the same classifiers in \emph{Scikit Learn} and obtain the error rates based on the training set size as Figure.\ref{fig:basic classifier}. In the basic classifier, Naïve Bayes starts at an error rate of 49\% and drops drastically when instance number reaches about 8K. It achieves 70\% accuracy at 50K and have not changed as the size of dataset increases. For Support Vector Machine and Logistic Regression, the error rates remain at around 29\% and have not changed as the number of instances increases. Decision Tree starts at an accuracy rate of 70\% and gradually decreases as the number of instances increases, and finally reaches around 74\% accuracy when the number of instances is 70K.
+Initially we use \emph{WEKA} package to implement the basic classifiers including Decision Tree, Naive Bayes and Support Vector Machine (SVM). The comparison of error rates shows that C4.5 Decision Tree has the best performance among these classifiers because its error rate is much lower than other classifiers. To verify the results we also implemented the same classifiers in \emph{Scikit Learn} and obtain the error rates based on the training set size as Figure.\ref{fig:basic classifier}. In the basic classifier, Naive Bayes starts at an error rate of 49\% and drops drastically when instance number reaches about 8K. It achieves 70\% accuracy at 50K and has not changed as the size of dataset increases. For Support Vector Machine and Logistic Regression, the error rates remain at around 29\% and have not changed as the number of instances increases. Decision Tree starts at an accuracy rate of 70\% and gradually decreases as the number of instances increases, and finally reaches around 74\% accuracy when the number of instances is 70K.
 
 \begin{figure}[!htb]
 \centering
@@ -314,7 +317,7 @@ Initially we use \emph{WEKA} package to implement the basic classifiers includin
 \label{fig:basic classifier}
 \end{figure}
 
-To improve the performance of the basic classifier, random forests and gradient boosting with decision tree are introduced and have shown improvements in accuracy as Figure.\ref{fig:ensemble classifier} indicated.  The baseline is decision tree which starts at an error rate of 39\% and decreases as the training instances increase. It reaches an error rate of 33\% when the data set is at 70K. Compared to decision tree, Random Forests get about 5\% lower on error rate, starting at 30\% and declining to 27.5\%. Gradient Boosting with Decision Tree shown great performance on the training data, which is initially at 24.5\% and decreases dramatically within the first 5K. Its error rate can achieve 22.5\%, which is much better than Random Forest and any other classifiers.
+To improve the performance of the basic classifier, Random Forests and Gradient Boosting with Decision Tree are introduced and have shown improvements in accuracy as Figure.\ref{fig:ensemble classifier} indicated.  The baseline is Decision Tree, which starts at an error rate of 39\% and decreases as the training instances increase. It reaches an error rate of 33\% when the data set is at 70K. Compared to Decision Tree, Random Forests receives about 5\% lower on error rate, starting at 30\% and declining to 27.5\%. Gradient Boosting with Decision Tree shown great performance on the training data, which is initially at 24.5\% and decreases dramatically within the first 5K. Its error rate can achieve 22.5\%, which is much better than Random Forests and any other classifiers.
 
 \begin{figure}[!htb]
 \centering
@@ -323,7 +326,7 @@ To improve the performance of the basic classifier, random forests and gradient 
 \label{fig:ensemble classifier}
 \end{figure}
 
-In order to enhance the accuracy further, we also performed feature selection within PCA implemented by \emph{Scikit Learn}. By using feature selection, we hope to reduce the less relevant information and get higher accuracy. Among the current 11 features, we use PCA to select 8 features before training the mode and get the results shown in Figure.\ref{fig:pca}. By comparing to the performance of the original classifiers without PCA, the feature selection increase the error rate using PCA, which means some important information have been dropped. The only exception is adaboosting within decision tree, in which the feature selection cancelled the overfitting.
+In order to enhance the accuracy rate further, we also performed feature selection with PCA implemented by \emph{Scikit Learn}. By using feature selection, we hope to eliminate the less relevant information and get a higher accuracy. Among the current 11 features, we use PCA to select 8 features before training the model and obtain the results shown in Figure.\ref{fig:pca}. By comparing to the performance of the original classifiers without PCA, Feature Selection using PCA increases the error rate as the number of instances increase, which suggests that some important information have been dropped. The only exception is Adaboosting with Decision Tree, in which the feature selection cancelled the overfitting.
 
 \begin{figure}[!htb]
 \centering
@@ -334,9 +337,9 @@ In order to enhance the accuracy further, we also performed feature selection wi
 
 \subsection{Collaborative Filtering}
 
-To find the optimal recommendation algorithm with the lowest error rate, collaborative filtering is also implemented. In this approach, we consider the \emph{destination\_country} as an attribute and use \emph{k} means to aggregate the similar users based on all the properties.  After clustering each cluster is labeled with the majority destination among all its members. To evaluate the model, each test case is predicted as the label of its closest cluster. 
+To find the optimal recommendation algorithm with the lowest error rate, collaborative filtering is also implemented. In this approach, we consider the \emph{destination\_country} as an attribute and use \emph{k} means to aggregate the similar users based on all the properties. After clustering, each cluster is labeled with the majority destination among all of its members. To evaluate the model, each test case is predicted as the label of its closest cluster. 
 
-The distance between each pair of users is computed by Euclidean Distance and the Within Group Sum of Square (WGSS) of distance is used as a measurement. To find the optimal cluster number should be, we define a threshold $\epsilon$. When the change rate of WGSS is smaller than the threshold, the best value of \emph{k} is achieved. As Table.\ref{table:clustering} shown, as the threshold get smaller, the more clusters need to be aggregated and the lower rate can be achieved. When $\epsilon$ is 0.001\%, the error rate can achieve 21.37\% which is better than the ensemble classifiers and basic classifiers. The trend of WGSS with the cluster is indicated in Figure.\ref{fig:k means}, where the WGSS falls rapidly until at the cluster number is about 400, the best value of \emph{k} is reached.
+The distance between each pair of users is computed by Euclidean Distance, and the Within Group Sum of Square (WGSS) of distance is used as a measurement. In order to find the optimal cluster number, we define a threshold $\epsilon$. When the change rate of WGSS is smaller than the threshold, the best value of \emph{k} is achieved. As Table.\ref{table:clustering} shown, as the threshold becomes smaller, more clusters need to be aggregated and thus a lower rate can be achieved. When $\epsilon$ is 0.001\%, the error rate can achieve 21.37\% which is better than the ensemble classifiers and basic classifiers. The trend of WGSS with the cluster is indicated in Figure.\ref{fig:k means}, where the WGSS falls rapidly until the cluster number is about 400, where the best value of \emph{k} is reached.
 
 \begin{table}[!htb]
 \centering
@@ -361,27 +364,27 @@ The distance between each pair of users is computed by Euclidean Distance and th
 
 \FloatBarrier
 \subsection{Three Layer Ensemble}
-In previous section, results from basic ensemble methods didn't improved significantly from individual classifier results, so we tried to take advantage of different ensemble methods to build this three layer Ensemble methods\cite{3layer}.
+In the previous section, results from the basic ensemble methods does not differ significantly from individual classifier results. We then combine different ensemble methods to build this three layer Ensemble methods\cite{3layer}.
 
-First of all, in order to perform multilayer Ensemble, we need to partition dataset into 3 parts: training set 64\%, validation set 16\%, testing set 20\%. And We will use X to denote features or predictions, y to denote labels.
+First of all, in order to perform multilayer ensemble, we need to partition the dataset into 3 parts: training set 64\%, validation set 16\%, testing set 20\%. From this point on we will use X to denote features or predictions and y to denote labels.
 
-For the first layer, we have used 6 individual classifiers: Logistic Regression, Random Forrest, Gradient Boosting, Deceision Tree, Extra Tree, K Nearest Neighbour. And all classifiers have been applied twice. First, Classifiers are trained on X\_train, y\_train and used to predict the class probabilities of X\_valid. Next, Classifiers are trained on X = X\_train + X\_valid, y = y\_train + y\_valid and used to predict the class probabilities of X\_test.
+For the first layer, we have used 6 individual classifiers: Logistic Regression, Random Forrest, Gradient Boosting, Decision Tree, Extra Tree, K Nearest Neighbor. All the classifiers have been applied twice. First, classifiers are trained on X\_train, y\_train and are used to predict the class probabilities of X\_valid. Next, classifiers are trained on X = X\_train + X\_valid, y = y\_train + y\_valid and are used to predict the class probabilities of X\_test.
 
 For the second layer, the predictions on X\_valid from first layer are concatenated and used to create a new training set XV, y\_valid. The predictions on X\_test are concatenated to create a new test set XT, y\_test. Then we train two following ensemble methods on XV, y\_valid, and make predictions on XT.
 
-First ensemble method is denoted as ENA, ENA computes optimized weights for each Prediction X made from first layer classifiers such that minimizes log\_loss of test result.
+The first ensemble method is denoted as ENA, which computes optimized weights for each prediction X made from first layer classifiers such that it minimizes log\_loss of test result.
 
-Second ensemble method is denoted as ENB, ENB is similar to ENA, but the weights will be assigned with respect to the number of classes we have. For example, X1,X2,...,Xn is the set of predictions given, for each Xi = Xi1,Xi2,...,Xim, where m is the number of classes, and assign weights to each predictions with respect to different classes.
+The second ensemble method is denoted as ENB. ENB is similar to ENA, but the weights will be assigned with respect to the number of classes we have. For example, X1,X2,...,Xn is the set of predictions given, for each Xi = Xi1,Xi2,...,Xim, where m is the number of classes, and assign weights to each predictions with respect to different classes.
 
-And in the end of this layer, we apply isotonic calibrated classifier obtained from scikit-learn package in python to genearate two new classifiers. So in second layer, we have obtained two ensemble classifiers and two isotonic calibrated classifier.
+In the end of this layer, we apply a Isotonic Calibrated Classifier obtained from the \emph{Scikit Learn} package in python to generate two new classifiers. Thus we have obtained two ensemble classifiers and two isotonic calibrated classifier in the second layer.
 
-Then comes to third layer, we assign arbitrarily weights to each classifiers we got from last layer, and combine them into a new classifier. After trying few sets of weights, we found weights [2/13, 4/13, 2/13, 5/13] for [ENA, calibrated ENA, ENB, calibrated ENB] has lowered log loss. We should trying to test more weight distributions programmatically in order to find the best one, or trying to incorporate some statistical techniques here for covering wider range of weight distributions, but due to the time limits, this weight distribution is by far the best value for the result.
+Then comes to the third layer, we assign arbitrary weights to each classifier we obtained from the previous layer, and combine them into a new classifier. After trying few sets of weights, we found weights [2/13, 4/13, 2/13, 5/13] for [ENA, calibrated ENA, ENB, calibrated ENB] has the lowest log loss. We should have tried to test more weight distributions programmatically in order to find the best one, or to incorporate some statistical techniques here for covering wider range of weight distributions, but due to the time limits, this weight distribution is by far the best value for the result.
 
-The final results for each layers are shown in the tables. Noticed that for first layer results, Gradient Boosting classifier has produced much better results compare with other classifiers we used in this experiment, it's bad for ensemble method since weight will be assigned heavily to Gradient Boosting classifier, other classifiers might get nealy zero weights,  thus the ensemble methods might not improve a lot from the result of Gradient Boosting classifier. 
+The final results for each layer are shown in the tables. Noticed that for first layer, Gradient Boosting classifier has produced much better result compared to other classifiers we used in this experiment. Ensemble methods are not suitable here because weight will be assigned heavily to Gradient Boosting Classifier, and other classifiers might get nearly zero weights. As a result, the ensemble methods might not improve a lot from the result of Gradient Boosting classifier. 
 
-The results from second layer proves this, for two ensemble methods ENA and ENB, while the log loss decreased for a very small amount, the error rate still remains the same, the calibrated ensemble methods improves a little on the error rate, but have increased on log loss. When comes to third layer results, noticed that althogh the log loss has decreased from 0.875 to 0.872, error rate however has increased from 0.2230 to 0.2231, so it's not very clear if this classifier has really improved the result from single Gradient Boosting classifier.
+The results from second layer prove that for two ensemble methods ENA and ENB, while the log loss decrease for a very small amount, the error rates still remain the same. The Calibrated Ensemble Methods improves a little on the error rate, but also has increased on log loss. When comes to third layer results, it is worth noticing that although the log loss has decreased from 0.875 to 0.872, error rate has increased from 0.2230 to 0.2231, so it's not very clear if this classifier has really improved the result from a single Gradient Boosting classifier.
 
-In the future version of this work, we might want to try more different classifiers to see if there's any other independent classifiers that can match with the result from Gradient Boosting classifier, because only then the ensemble methods can take advantage of few different classifiers and provide more preceise results.
+In the future, we might want to try more classifiers to see if there exists any other independent classifiers that can match with the result from Gradient Boosting classifier, because only then the ensemble methods can take advantage of few different classifiers and produce more precise results.
 
 \begin{table}[ht]
 \centering
@@ -427,11 +430,11 @@ log\_loss & error\_rate \\ \hline
 \FloatBarrier
 \section{Conclusion}
 
-Decision tree shows good performance among all the basic classifiers, which is might be cause by the fact that most of attributes are categorical. So decision tree is much more suitable for this problem. The ensemble methods can improve the performance effectively and gradient boosting works better than random forest. In this problem feature selection is less useful since reducing the number of attributes would loss the relevant information. 
+Decision tree demonstrates good performance among all the basic classifiers, which might due to the fact that most of attributes are categorical. As a result, decision tree is suitable for this problem. The ensemble methods can improve the performance effectively and Gradient Boosting works better than Random Forests. In this problem, feature selection is less useful since reducing the number of attributes would sacrifice the relevant information. 
 
-The algorithm based on collaborative filtering can achieve lower error rate than both basic classifiers and ensemble methods. This algorithm is implemented by k means clustering and its performance is highly depended on the number of clusters to be aggregated. To obtain the best value of cluster number, WGSS is involved as an effective measurement.
+The algorithm based on collaborative filtering can achieve lower error rate than both the basic classifiers and ensemble methods. This algorithm is implemented by k means clustering and its performance is highly depended on the number of clusters to be aggregated. To obtain the best value of cluster number, WGSS is involved as an effective measurement.
 
-Three layer ensemble methods should improve its performance by trying different classifiers such that their results can match with Gradient Boosting results, also weight distributions in third layer should be explored thoroughly to find the best result.
+Three layer ensemble methods are expected to improve its performance by trying different classifiers such that their results can match with the result from Gradient Boosting. A good takeaway is that weight distributions in the third layer should be explored thoroughly to find the best result.
 
 \medskip
 

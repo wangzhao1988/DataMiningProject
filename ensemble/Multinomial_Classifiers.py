@@ -1,4 +1,3 @@
-__author__ = 'zhao'
 
 import numpy as np
 import pandas as pd
