@@ -137,7 +137,7 @@
 
 \maketitle
 \begin{abstract}
-Airbnb has become more and more popular under the trend of sharing economy. In order to attract new users to place their first booking on Airbnb and offer a more personalized experience, we aim to build a recommendation system by using collaborative filtering approach, to predict which country these new users will make their first booking. Also the hosting data for various countries will be analyzed to provide better insight around booking area.
+In this paper, we aim to design an optimal recommendation algorithm to predict which country the Airbnb new users will make their first booking. To solve this problem, some basic classifiers are used and evaluated by their error rates. To improve the performance of the weak learners, the ensemble methods are also introduced. We also design a recommendation algorithm based on collaborative filtering and obtain the better performance. Meanwhile a 3-layer ensemble framework based on basic classifiers and ensemble methods is introduced.
 \end{abstract}
 
 
@@ -185,7 +185,7 @@ Airbnb has become more and more popular under the trend of sharing economy. In o
 % We no longer use \terms command
 %\terms{Theory}
 
-\keywords{Learning Algorithms; Recommendation Systems; Collaborative Filtering; Cluster Models}
+\keywords{Learning Algorithms; Classifier; Ensemble; Collaborative Filtering}
 
 \section{Introduction}
 Data mining is the process of discovering interesting patterns from massive amounts of data. As a knowledge discovery process, it typically involves data cleaning, data integration, data selection, data transformation, pattern discovery, pattern evaluation, and knowledge presentation\cite{data mining}. The science of learning plays a key role in the fields of data mining, statistics and artificial intelligence, intersecting with areas of engineering and other disciplines\cite{statistical}.  In a typical scenario, a quantitative or categorical outcome measurement is predicted based on a set of features.
@@ -426,6 +426,11 @@ log\_loss & error\_rate \\ \hline
 
 \FloatBarrier
 \section{Conclusion}
+
+Decision tree shows good performance among all the basic classifiers, which is might be cause by the fact that most of attributes are categorical. So decision tree is much more suitable for this problem. The ensemble methods can improve the performance effectively and gradient boosting works better than random forest. In this problem feature selection is less useful since reducing the number of attributes would loss the relevant information. 
+
+The algorithm based on collaborative filtering can achieve lower error rate than both basic classifiers and ensemble methods. This algorithm is implemented by k means clustering and its performance is highly depended on the number of clusters to be aggregated. To obtain the best value of cluster number, WGSS is involved as an effective measurement.
+
 Three layer ensemble methods should improve its performance by trying different classifiers such that their results can match with Gradient Boosting results, also weight distributions in third layer should be explored thoroughly to find the best result.
 
 \medskip
