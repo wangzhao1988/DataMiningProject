@@ -197,10 +197,10 @@ User experience is now a critical factor to keep users and attract new users amo
 However, the main challenge here is that Airbnb doesn't have the travel history or other type of the traveling data of new users, the only data available here is basic feature such as age, gender, session log etc., basically like a white paper to a recommendation system. While a typical recommendation system might make recommendation based on a few strongly related features, the system designed here need to focus on correctly classify similar users first, then trying to make recommendation with some relatively strong features. And that is why we choose collaborative filtering as our first-step approach.
 
 \section{Dataset Description}
-In this section, the data sets which are applied for the recommendation are introduced. The data is  consisted of two parts: the first one is the list of users\' first booking destinations as well as their demographics and web session records; the other is the aggregated public host information dataset which is sourced from publicly available information from the Airbnb site. By analyzing the statistics of the source data, we can have an overview of the entire data and help to decide how to apply for the recommendation algorithms.
+In this section, the data sets which are applied for the recommendation algorithms are introduced. The data is  consisted of two parts: the first one is the list of users\' first booking destinations as well as their personal information and web session records; the other is the aggregated public host information dataset which is sourced from the Airbnb site. By analyzing the statistics of the source data, we can have an overview of the entire data and decide how to do the process and apply the data for the recommendation algorithms.
 
 \subsection{User data set}
-In the list of user first booking, each user is specified by a unique string id and each instance contains multiple types of properties for that user, which should be date, numerical, categorical, etc. There exists missing values in each fields, which should be handled before building recommendation model. The users whose destination countries are unavailable (indicated as NDF) are also need to be filtered out. The details of user properties are described as Table.\ref{table:users}.
+In the list of user first booking, each user is specified by a unique string id and each record contains multiple types of properties for that user, including account created time, age, sign up device, etc. There exists missing values in each fields, which should be addressed before training recommendation model. The users whose destination countries are unavailable (indicated as NDF) are also need to be filtered out since we are going to predict the destination countries for those users. The details of user properties are described as Table.\ref{table:users}.
 
 \begin{table}[!htb]
 \caption{User Data Statistics}
@@ -223,7 +223,7 @@ first\_browser  & categorical & \shortstack[l]{Chrome, Safari, Firefox, etc.} \\
 \hline \end{tabular}
 \end{table}
 
-Since most records in the dataset have no first booking destination, we only focus on the instances with available destination. After filtering the records without specific destinations, the numbers of the users for each country are as Table.\ref{table:destination} described. The most number of remaining users is for other destinations, which is less useful for the recommendation. The instances with specific destinations are the data we can use to build the predication model for new users.
+After dropping the records without specific destinations, the numbers of the users for each country are shown as Table.\ref{table:destination} described. The instances with specific destinations are the data we should focus on to build the predication model for new users. From the Table.\ref{table:destination} we can conclude that most users choose U.S. as their first booking destination since Airbnb is a company in U.S. At sometime, there is a lot of users traveling to the countries which are listed in those specific countries (indicated as other).
 
 \begin{table}[!htb]
 \centering
@@ -245,7 +245,9 @@ other & 10075 \\
 \hline\end{tabular}
 \end{table}
 
-\begin{figure}
+The Figure.\ref{fig:age distribution} describe the age distribution of the users in the list. 
+
+\begin{figure}[!htb]
 \centering
 \includegraphics[height=2in, width=3in]{AgeDistribution}
 \caption{Age Distribution for Users on Airbnb}
@@ -258,7 +260,7 @@ The other data set is about detailed information of host listings among 16 count
 
 This listing data set contains most of the public information available on Airbnb, and lots of features such as listing price, listing rating score, host registration information and neighbourhood etc., may help recommendation system identify better listings among target country for new users. However, due to the limitation of new user data, the recommendation on this part is most likely to be based on features weighted by common sense: highest rated, best available price etc..
 
-\begin{figure}
+\begin{figure}[!htb]
 \centering
 \includegraphics[height=2in, width=3in]{country-avgPrice}
 \caption{Average price distribution among countries}
@@ -266,7 +268,7 @@ This listing data set contains most of the public information available on Airbn
 
 Since listing price is showed in dollar, so the average listing price distribution is influenced by currency exchange rate in some extent, but besides that fact, the average listing price definitely reflects the popularity of these destination countries. BM(Bermuda) is a typical high-end vacation hot spot, but it's surprised to see UY(Uruguay) has such a high average price, maybe because the retrived UY listings is very limited. Other than these two countries, AU and US are the most expensive countries to go on Airbnb. It's interesting to see AU has higher average listing price over US, a possible explaination for this could be the number of listings in US is much greater than AU's, thus competetion over the host has lowered the average listing price in US.
 
-\begin{figure}
+\begin{figure}[!htb]
 \centering
 \includegraphics[height=2in, width=3in]{country-avgRating}
 \caption{Average rating score distribution among countries}
@@ -276,11 +278,10 @@ When comes to average review scores, most of countries get over score of 90. BM,
 
 \FloatBarrier
 \section{Proposed Algorithmic Approach}
-Using collaborative filtering to aggregate the similar users based on their first booking on Airbnb. The similarity between users is measured by cosine of the angle between the two vectors which indicate user properties. Dimensionality reduction should be applied to reduce computational complexity and speed up the algorithm.
+In this section, we introduce the learning algorithms we have used to implement the recommendation and evaluate their performance. At first, some basic classifiers are used and compared to find the optimal one which could do the predictions with the lowest error rate. Based on that some ensemble technicals such as boosting algorithm, random forest and feature selection are involved to improve the performance. Meanwhile we also use the collaborative filtering to build the recommendation model, in which the training dataset is clustered into \emph{k} clusters and each testing instance is label by its closest cluster. A 3-layer ensemble classifier framework is also introduced to achieve performance improvements.
 
 \subsection{Data preprocess}
-Since each 
-
+The original properties for each users involve different data types, includes date and timestamp, so we need to convert all the features into numerical or categorical. As described in Table \ref{table:preprocess}, we compute the lag days between \emph{date\_first\_booking} and \emph{date\_account\_created} and divide the result into four categories [=0, < 0, >0, NA]. Some operation is also taken on \emph{date\_first\_booking} and \emph{timestamp\_first\_active}. For the age attribute, the missing values are replaced by the conditional mean and all the values are scaled by mean and standard deviation. Since the values in \emph{signup\_flow} are integers from 0 to 25, this attribute is considered as categorical when training the model. The training and testing set occupy 80\% and 20\% of entire data set.
 
 \begin{table}[!htb]
 \centering
@@ -296,29 +297,35 @@ Age &
 \shortstack[l]{Replace the missing values \\
 with the conditional mean; \\
 scale the age with mean \\
-and standard variance} \\ \hline
+and standard deviation} \\ \hline
+signup\_flow & Categorical Attribute \\ \hline
 Others & Original value \\
 \hline\end{tabular}
 \end{table}
 
 
 \subsection{Basic and Ensemble Classifiers}
+Initially we use \emph{WEKA} package to implement the basic classifiers including decision tree,  naive Bayes and support vector machine (SVM). The comparison of error rates shows that C4.5 decision tree has the best performance among these classifiers, whose error rate is much lower than other classifiers. To verify the results we also implemented the same classifiers in \emph{Scikit Learn} and obtain the error rates based on the training set size as Figure.\ref{fig:basic classifier}. In the basic classifier, Naïve Bayes starts at an error rate of 49\% and drops drastically when instance number reaches about 8K. It achieves 70\% accuracy at 50K and have not changed as the size of dataset increases. For Support Vector Machine and Logistic Regression, the error rates remain at around 29\% and have not changed as the number of instances increases. Decision Tree starts at an accuracy rate of 70\% and gradually decreases as the number of instances increases, and finally reaches around 74\% accuracy when the number of instances is 70K.
 
-\begin{figure}
+\begin{figure}[!htb]
 \centering
-\includegraphics[height=2in, width=3in]{Basic_Classifiers}
+\includegraphics[height=2in, width=3in]{Basic_Classifiers_2}
 \caption{Error Rates for Basic Classifier}
 \label{fig:basic classifier}
 \end{figure}
 
-\begin{figure}
+To improve the performance of the basic classifier, random forests and gradient boosting with decision tree are introduced and have shown improvements in accuracy as Figure.\ref{fig:ensemble classifier} indicated.  The baseline is decision tree which starts at an error rate of 39\% and decreases as the training instances increase. It reaches an error rate of 33\% when the data set is at 70K. Compared to decision tree, Random Forests get about 5\% lower on error rate, starting at 30\% and declining to 27.5\%. Gradient Boosting with Decision Tree shown great performance on the training data, which is initially at 24.5\% and decreases dramatically within the first 5K. Its error rate can achieve 22.5\%, which is much better than Random Forest and any other classifiers.
+
+\begin{figure}[!htb]
 \centering
-\includegraphics[height=2in, width=3in]{Ensemble_Classifiers}
+\includegraphics[height=2in, width=3in]{Ensemble_Classifiers_2}
 \caption{Error Rates for Ensemble Classifier}
 \label{fig:ensemble classifier}
 \end{figure}
 
-\begin{figure}
+In order to enhance the accuracy further, we also performed feature selection within PCA implemented by \emph{Scikit Learn}. By using feature selection, we hope to reduce the less relevant information and get higher accuracy. Among the current 11 features, we use PCA to select 8 features before training the mode and get the results shown in Figure.\ref{fig:pca}. By comparing to the performance of the original classifiers without PCA, the feature selection increase the error rate using PCA, which means some important information have been dropped. The only exception is adaboosting within decision tree, in which the feature selection cancelled the overfitting.
+
+\begin{figure}[!htb]
 \centering
 \includegraphics[height=2in,width=3in]{PCA_Classifiers}
 \caption{PCA with Classifiers}
@@ -326,6 +333,10 @@ Others & Original value \\
 \end{figure}
 
 \subsection{Collaborative Filtering}
+
+To find the optimal recommendation algorithm with the lowest error rate, collaborative filtering is also implemented. In this approach, we consider the \emph{destination\_country} as an attribute and use \emph{k} means to aggregate the similar users based on all the properties.  After clustering each cluster is labeled with the majority destination among all its members. To evaluate the model, each test case is predicted as the label of its closest cluster. 
+
+The distance between each pair of users is computed by Euclidean Distance and the Within Group Sum of Square (WGSS) of distance is used as a measurement. To find the optimal cluster number should be, we define a threshold $\epsilon$. When the change rate of WGSS is smaller than the threshold, the best value of \emph{k} is achieved. As Table.\ref{table:clustering} shown, as the threshold get smaller, the more clusters need to be aggregated and the lower rate can be achieved. When $\epsilon$ is 0.001\%, the error rate can achieve 21.37\% which is better than the ensemble classifiers and basic classifiers. The trend of WGSS with the cluster is indicated in Figure.\ref{fig:k means}, where the WGSS falls rapidly until at the cluster number is about 400, the best value of \emph{k} is reached.
 
 \begin{table}[!htb]
 \centering
@@ -341,7 +352,7 @@ Others & Original value \\
 \hline\end{tabular}
 \end{table}
 
-\begin{figure}
+\begin{figure}[!htb]
 \centering
 \includegraphics[height=2in,width=3in]{K_Means}
 \caption{WGSS based on Clusters}
